@@ -2,6 +2,8 @@ const PORT = process.env.PORT || 3001;
 
 import express from "express";
 import cors from "cors";
+import cronRouter from "./routes/cronRouter.js"
+import homeRouter from "./routes/homeRouter.js"
 
 const app = express();
 
