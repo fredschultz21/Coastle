@@ -6,8 +6,8 @@ export async function updateCountry(req, res) {
   try {
     const lat = 40.7128;
     const lon = -74.0060;
-    const width = 1920;
-    const height = 1080;
+    const width = 1280;
+    const height = 720;
 
     const MAPBOX_USERNAME = process.env.MAPBOX_USERNAME;
     const MAPBOX_STYLE_ID = process.env.MAPBOX_STYLE_ID;
