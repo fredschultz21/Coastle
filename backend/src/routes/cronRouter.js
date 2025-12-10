@@ -4,6 +4,6 @@ import { updateCountry } from "../controllers/cronController.js";
 
 const router = express.Router();
 
-router.post("/cron", updateCountry);
+router.post("/", updateCountry);
 
 export default router;
