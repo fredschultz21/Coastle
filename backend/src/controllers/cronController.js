@@ -17,6 +17,9 @@ export async function updateCountry(req, res) {
       return res.status(500).json({ error: "Mapbox env vars missing" });
     }
 
+    const mapsDir = path.join(process.cwd(), "src", "maps");
+    await fs.promises.mkdir(mapsDir, { recursive: true });
+
     const saved = [];
 
     for (let i = 1; i <= 10; i++) {
