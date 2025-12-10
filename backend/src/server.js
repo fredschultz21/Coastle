@@ -13,6 +13,7 @@ app.use(cors());
 
 app.use(express.json());
 
-//app.use("/", homeRouter);
+app.use("/cron", cronRouter);
+app.use("/", homeRouter);
 
 app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
