@@ -17,7 +17,7 @@ export async function updateCountry(req, res) {
       return res.status(500).json({ error: "Mapbox env vars missing" });
     }
 
-    const saved = []; // <--- collect saved files
+    const saved = [];
 
     for (let i = 1; i <= 10; i++) {
       const imageUrl = `https://api.mapbox.com/styles/v1/${MAPBOX_USERNAME}/${MAPBOX_STYLE_ID}/static/${lon},${lat},${i}/${width}x${height}?access_token=${MAPBOX_ACCESS_TOKEN}`;
@@ -38,9 +38,14 @@ export async function updateCountry(req, res) {
 
       await fs.promises.writeFile(filePath, buffer);
 
-      await pool.query(`UPDATE image_links SET link = $1 WHERE id = $2`, [publicPath, i]);
+      // CHANGED: Using INSERT ... ON CONFLICT instead of UPDATE
+      await pool.query(
+        `INSERT INTO image_links (id, link) VALUES ($1, $2)
+         ON CONFLICT (id) DO UPDATE SET link = $2`,
+        [i, publicPath]
+      );
 
-      saved.push(publicPath); // <--- add to saved array
+      saved.push(publicPath);
     }
 
     res.json({
