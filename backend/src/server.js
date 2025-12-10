@@ -7,13 +7,14 @@ import homeRouter from "./routes/homeRouter.js"
 
 const app = express();
 
-//const allowedOrigin = process.env.FRONTEND_URL;
-
-//app.use(cors({ origin: allowedOrigin })); 
-
 app.use(cors());
-
 app.use(express.json());
+
+// Add logging middleware
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+  next();
+});
 
 app.use("/cron", cronRouter);
 app.use("/", homeRouter);
