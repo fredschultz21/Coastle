@@ -1,6 +1,10 @@
 import { pool } from "../config/db.js"; 
-import fs from "fs"; 
-import path from "path"; 
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY
+);
 
 export async function updateCountry(req, res) {
   try {
@@ -17,8 +21,9 @@ export async function updateCountry(req, res) {
       return res.status(500).json({ error: "Mapbox env vars missing" });
     }
 
-    const mapsDir = path.join(process.cwd(), "src", "maps");
-    await fs.promises.mkdir(mapsDir, { recursive: true });
+    if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      return res.status(500).json({ error: "Supabase env vars missing" });
+    }
 
     const saved = [];
 
@@ -35,24 +40,46 @@ export async function updateCountry(req, res) {
 
       const buffer = Buffer.from(await response.arrayBuffer());
 
+      // Create a unique filename
       const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-      const filePath = path.join(process.cwd(), "src", "maps", `zoom_${i}_${timestamp}.png`);
-      const publicPath = path.join("maps", `zoom_${i}_${timestamp}.png`);
+      const fileName = `zoom_${i}_${timestamp}.png`;
+      const storagePath = `maps/${fileName}`;
 
-      await fs.promises.writeFile(filePath, buffer);
+      // Upload to Supabase Storage
+      const { data: uploadData, error: uploadError } = await supabase
+        .storage
+        .from('map-images') // Your bucket name - create this in Supabase dashboard
+        .upload(storagePath, buffer, {
+          contentType: 'image/png',
+          upsert: true
+        });
 
-      // CHANGED: Using INSERT ... ON CONFLICT instead of UPDATE
+      if (uploadError) {
+        console.error('Supabase upload error:', uploadError);
+        return res.status(500).json({
+          error: "Supabase upload failed",
+          details: uploadError.message,
+        });
+      }
+
+      // Get public URL
+      const { data: { publicUrl } } = supabase
+        .storage
+        .from('map-images')
+        .getPublicUrl(storagePath);
+
+      // Store the public URL in your database
       await pool.query(
         `INSERT INTO image_links (id, link) VALUES ($1, $2)
          ON CONFLICT (id) DO UPDATE SET link = $2`,
-        [i, publicPath]
+        [i, publicUrl]
       );
 
-      saved.push(publicPath);
+      saved.push(publicUrl);
     }
 
     res.json({
-      message: "Images generated",
+      message: "Images generated and uploaded to Supabase",
       files: saved,
     });
 
