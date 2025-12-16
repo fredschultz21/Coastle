@@ -1,12 +1,15 @@
-import express from "express";
-import cors from "cors";
-import path from "path";
+import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
-import cronRouter from "./routes/cronRouter.js"
-import homeRouter from "./routes/homeRouter.js"
+import path from 'path';
+import fs from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+import express from "express";
+import cors from "cors";
+import cronRouter from "./routes/cronRouter.js"
+import homeRouter from "./routes/homeRouter.js"
 
 const PORT = process.env.PORT || 3001;
 const app = express();
