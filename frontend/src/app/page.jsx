@@ -32,14 +32,14 @@ export default function Home() {
       onMouseLeave={handleMouseUp}
     >
       <div 
-        className="flex items-center justify-center bg-zinc-50 dark:bg-zinc-900"
+        className="flex items-center justify-center bg-zinc-50 dark:bg-zinc-900 overflow-hidden"
         style={{ width: `${leftWidth}%` }}
       >
-        <div className="flex flex-col items-center gap-4 p-8">
+        <div className="flex flex-col items-center gap-4">
           <img 
             src="https://jddbikgujwntbkabchjw.supabase.co/storage/v1/object/public/map-images/daily/zoom_7_2025-12-18T17-50-20-595Z.png"
             alt="Map"
-            className="max-w-full h-auto rounded-lg shadow-lg"
+            className="w-[1280px] h-[720px] object-cover rounded-lg shadow-lg"
           />
           <p className="text-xs text-zinc-600 dark:text-zinc-400">
             © Mapbox © OpenStreetMap contributors © Maxar
@@ -48,7 +48,7 @@ export default function Home() {
       </div>
 
       <div
-        className="w-1 bg-zinc-300 dark:bg-zinc-700 cursor-col-resize hover:bg-blue-500 hover:w-2 transition-all"
+        className="w-1 bg-zinc-300 dark:bg-zinc-700 cursor-col-resize hover:bg-zinc-400 dark:hover:bg-zinc-600"
         onMouseDown={handleMouseDown}
       />
 
