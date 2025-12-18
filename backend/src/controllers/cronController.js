@@ -25,10 +25,35 @@ export async function updateCountry(req, res) {
       return res.status(500).json({ error: "Supabase env vars missing" });
     }
 
+    console.log('Clearing old images from daily folder...');
+    const { data: existingFiles, error: listError } = await supabase
+      .storage
+      .from('map-images')
+      .list('daily');
+
+    if (listError) {
+      console.error('Error listing files:', listError);
+    } else if (existingFiles && existingFiles.length > 0) {
+      const filesToDelete = existingFiles.map(file => `daily/${file.name}`);
+      
+      const { error: deleteError } = await supabase
+        .storage
+        .from('map-images')
+        .remove(filesToDelete);
+
+      if (deleteError) {
+        console.error('Error deleting files:', deleteError);
+      } else {
+        console.log(`Deleted ${filesToDelete.length} old images`);
+      }
+    }
+
+
     const saved = [];
 
     for (let i = 1; i <= 10; i++) {
       const imageUrl = `https://api.mapbox.com/styles/v1/${MAPBOX_USERNAME}/${MAPBOX_STYLE_ID}/static/${lon},${lat},${i}/${width}x${height}?access_token=${MAPBOX_ACCESS_TOKEN}`;
+
 
       const response = await fetch(imageUrl);
       if (!response.ok) {
@@ -39,13 +64,12 @@ export async function updateCountry(req, res) {
       }
 
       const buffer = Buffer.from(await response.arrayBuffer());
+      console.log(`Zoom ${i} - Buffer size:`, buffer.length, 'bytes'); // ADD THIS
 
-      // Create a unique filename
       const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
       const fileName = `zoom_${i}_${timestamp}.png`;
-      const storagePath = `maps/${fileName}`;
+      const storagePath = `daily/${fileName}`;
 
-      // Upload to Supabase Storage
       const { data: uploadData, error: uploadError } = await supabase
         .storage
         .from('map-images') // Your bucket name - create this in Supabase dashboard
@@ -62,7 +86,6 @@ export async function updateCountry(req, res) {
         });
       }
 
-      // Get public URL
       const { data: { publicUrl } } = supabase
         .storage
         .from('map-images')
@@ -83,6 +106,19 @@ export async function updateCountry(req, res) {
       files: saved,
     });
 
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error", details: err.message });
+  }
+}
+
+export async function getPaths(req, res) {
+  try {
+    const { rows } = await pool.query("SELECT * FROM image_links");
+    if (rows.length === 0) {
+      return res.status(404).json({ message: "Links not found" });
+    };
+    res.json(rows);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error", details: err.message });

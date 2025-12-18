@@ -18,8 +18,18 @@ export const pool = new Pool({
   // Connection pool settings to prevent exhaustion
   max: 20, // Maximum number of clients in the pool
   idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
-  connectionTimeoutMillis: 2000, // Timeout if connection takes too long
+  connectionTimeoutMillis: 100000, // Timeout if connection takes too long
 });
+
+
+pool.query('SELECT NOW()', (err, res) => {
+  if (err) {
+    console.error('❌ Database connection failed:', err.message);
+  } else {
+    console.log('✅ Database connected successfully at:', res.rows[0].now);
+  }
+});
+
 
 // Handle pool-level errors to prevent crashes
 pool.on('error', (err, client) => {
@@ -28,9 +38,11 @@ pool.on('error', (err, client) => {
 });
 
 // Test connection on startup WITHOUT holding a client
+/*
 pool.query('SELECT NOW()')
   .then(() => console.log("Connected to Supabase!"))
   .catch(err => console.error("DB connection error:", err));
+*/
 
 // Graceful shutdown handler
 process.on('SIGTERM', async () => {
