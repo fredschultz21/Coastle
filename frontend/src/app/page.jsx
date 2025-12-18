@@ -39,7 +39,7 @@ export default function Home() {
           <img 
             src="https://jddbikgujwntbkabchjw.supabase.co/storage/v1/object/public/map-images/daily/zoom_7_2025-12-18T17-50-20-595Z.png"
             alt="Map"
-            className="w-[1280px] h-[720px] object-cover rounded-lg shadow-lg"
+            className="w-[640px] h-[360px] object-cover rounded-lg shadow-lg"
           />
           <p className="text-xs text-zinc-600 dark:text-zinc-400">
             © Mapbox © OpenStreetMap contributors © Maxar
