@@ -52,7 +52,7 @@ export async function updateCountry(req, res) {
     const saved = [];
 
     for (let i = 1; i <= 10; i++) {
-      const imageUrl = `https://api.mapbox.com/styles/v1/${MAPBOX_USERNAME}/${MAPBOX_STYLE_ID}/static/${lon},${lat},${i}/${width}x${height}?logo=false&attribution=false&access_token=${MAPBOX_ACCESS_TOKEN}`;
+      const imageUrl = `https://api.mapbox.com/styles/v1/${MAPBOX_USERNAME}/${MAPBOX_STYLE_ID}/static/${lon},${lat},${i}/${width}x${height}@2x?logo=false&attribution=false&access_token=${MAPBOX_ACCESS_TOKEN}`;
 
 
       const response = await fetch(imageUrl);
