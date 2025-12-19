@@ -35,13 +35,13 @@ export default function Home() {
         className="flex items-center justify-center bg-zinc-50 dark:bg-zinc-900 overflow-hidden"
         style={{ width: `${leftWidth}%` }}
       >
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col h-screen justify-center gap-4">
           <img 
             src="https://jddbikgujwntbkabchjw.supabase.co/storage/v1/object/public/map-images/daily/zoom_1.png"
             alt="Map"
-            className="w-[960px] h-[540px] object-cover rounded-lg shadow-lg"
+            className="h-screen w-auto object-contain"
           />
-          <p className="text-xs text-zinc-600 dark:text-zinc-400">
+          <p className="text-xs text-zinc-600 dark:text-zinc-400 absolute bottom-4">
             © Mapbox © OpenStreetMap contributors © Maxar
           </p>
         </div>
