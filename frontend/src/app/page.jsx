@@ -59,8 +59,8 @@ export default function Home() {
         <img 
           src="/pixelmap.png" 
           alt="Pixel Map"
-          style={{ imageRendering: 'pixelated' }}
-          className="max-w-full max-h-full object-contain"
+          style={{ imageRendering: 'pixelated', transform: 'scale(3)' }}
+          className="object-contain"
         />
       </div>
     </div>
