@@ -37,7 +37,7 @@ export default function Home() {
       >
         <div className="flex flex-col items-center gap-4">
           <img 
-            src="https://jddbikgujwntbkabchjw.supabase.co/storage/v1/object/public/map-images/daily/zoom_7_2025-12-18T17-50-20-595Z.png"
+            src="https://jddbikgujwntbkabchjw.supabase.co/storage/v1/object/public/map-images/daily/zoom_1.png"
             alt="Map"
             className="w-[960px] h-[540px] object-cover rounded-lg shadow-lg"
           />
@@ -56,9 +56,12 @@ export default function Home() {
         className="flex items-center justify-center bg-white dark:bg-black"
         style={{ width: `${100 - leftWidth}%` }}
       >
-        <p className="text-xl text-zinc-800 dark:text-zinc-200">
-          Right Panel
-        </p>
+        <img 
+          src="/pixelmap.png" 
+          alt="Pixel Map"
+          style={{ imageRendering: 'pixelated' }}
+          className="max-w-full max-h-full object-contain"
+        />
       </div>
     </div>
   );
