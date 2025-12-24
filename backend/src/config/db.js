@@ -2,57 +2,12 @@ import { Pool } from "pg";
 import dotenv from 'dotenv';
 dotenv.config();
 
-const connectionString = process.env.DATABASE_URL;
-
-console.log('DATABASE_URL loaded:', connectionString ? 'YES' : 'NO');
-
-if (!connectionString) {
-  console.error("ERROR: DATABASE_URL environment variable is not set!");
-  process.exit(1);
-}
-
 export const pool = new Pool({
-  connectionString: connectionString,
-  family: 4,
+  connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false },
-  // Connection pool settings to prevent exhaustion
-  max: 20, // Maximum number of clients in the pool
-  idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
-  connectionTimeoutMillis: 100000, // Timeout if connection takes too long
+  connectionTimeoutMillis: 10000,
 });
 
-
-pool.query('SELECT NOW()', (err, res) => {
-  if (err) {
-    console.error('❌ Database connection failed:', err.message);
-  } else {
-    console.log('✅ Database connected successfully at:', res.rows[0].now);
-  }
-});
-
-
-// Handle pool-level errors to prevent crashes
-pool.on('error', (err, client) => {
-  console.error('Unexpected error on idle client:', err);
-  // Don't exit - the pool will handle reconnection
-});
-
-// Test connection on startup WITHOUT holding a client
-/*
-pool.query('SELECT NOW()')
-  .then(() => console.log("Connected to Supabase!"))
-  .catch(err => console.error("DB connection error:", err));
-*/
-
-// Graceful shutdown handler
-process.on('SIGTERM', async () => {
-  console.log('SIGTERM received, closing database pool...');
-  await pool.end();
-  process.exit(0);
-});
-
-process.on('SIGINT', async () => {
-  console.log('SIGINT received, closing database pool...');
-  await pool.end();
-  process.exit(0);
+pool.on('error', (err) => {
+  console.error('Pool error:', err);
 });

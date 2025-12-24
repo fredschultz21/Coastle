@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 
 import express from "express";
 import cors from "cors";
-import cronRouter from "./routes/cronRouter.js"
+import dataRouter from "./routes/dataRouter.js"
 import homeRouter from "./routes/homeRouter.js"
 
 const PORT = process.env.PORT || 3001;
@@ -26,7 +26,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/cron", cronRouter);
+app.use("/data", dataRouter);
 app.use("/", homeRouter);
 
 app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
