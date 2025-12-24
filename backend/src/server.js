@@ -27,6 +27,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/data", dataRouter);
-app.use("/", homeRouter);
+//app.use("/", homeRouter);
 
 app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
