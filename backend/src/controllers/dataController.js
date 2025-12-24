@@ -2,7 +2,6 @@ import { pool } from "../config/db.js";
 
 export async function getDaily(req, res) {
   try {
-    // Get the current day's location ID from location_of_the_day table
     const { rows: dayRows } = await pool.query(
       "SELECT location_id FROM location_of_the_day LIMIT 1"
     );
@@ -13,7 +12,6 @@ export async function getDaily(req, res) {
 
     const locationId = dayRows[0].location_id;
 
-    // Get the full location data from locations table
     const { rows: locationRows } = await pool.query(
       "SELECT * FROM locations WHERE id = $1",
       [locationId]
@@ -26,7 +24,13 @@ export async function getDaily(req, res) {
       });
     }
 
-    res.json(locationRows[0]);
+    const location = locationRows[0];
+    
+    res.json({
+      ...location,
+      latitude: parseFloat(location.latitude),
+      longitude: parseFloat(location.longitude)
+    });
 
   } catch (err) {
     console.error(err);
