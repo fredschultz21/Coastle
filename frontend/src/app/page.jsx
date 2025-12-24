@@ -18,6 +18,8 @@ export default function Home() {
   const [guessLatLong, setGuessLatLong] = useState(null);
   const [locationData, setLocationData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showResults, setShowResults] = useState(false);
+  const [gameResults, setGameResults] = useState(null);
   const containerRef = useRef(null);
   const imageRef = useRef(null);
   const pinTimeoutRef = useRef(null);
@@ -32,7 +34,6 @@ export default function Home() {
 
   const dailyId = new Date().toISOString().split('T')[0];
 
-  // Fetch today's location data
   useEffect(() => {
     const fetchLocationData = async () => {
       try {
@@ -78,9 +79,8 @@ export default function Home() {
     return { lat, lon };
   };
 
-  // Calculate distance between two coordinates using Haversine formula
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    const R = 3959; // Earth's radius in miles
+    const R = 3959;
     const dLat = (lat2 - lat1) * Math.PI / 180;
     const dLon = (lon2 - lon1) * Math.PI / 180;
     const a = 
@@ -90,6 +90,20 @@ export default function Home() {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     const distance = R * c;
     return distance;
+  };
+
+  const calculateScore = (turn, distance) => {
+    const basePoints = (11 - turn) * 1000;
+    const distanceRings = Math.floor(distance / 100);
+    const penalty = distanceRings * 1000;
+    const finalScore = Math.max(0, basePoints - penalty);
+    
+    return {
+      basePoints,
+      penalty,
+      finalScore,
+      distanceRings
+    };
   };
 
   const handleSatelliteZoomOut = () => {
@@ -241,7 +255,6 @@ export default function Home() {
       setHasGuessed(true);
       setSatelliteZoom(3);
       
-      // Calculate distance between guess and actual location
       const distance = calculateDistance(
         guessedLatLong.lat,
         guessedLatLong.lon,
@@ -250,17 +263,27 @@ export default function Home() {
       );
       
       const isCorrect = distance <= 100;
+      const turnNumber = 11 - satelliteZoom;
+      const scoreData = calculateScore(satelliteZoom, distance);
+      
+      setGameResults({
+        distance: distance,
+        isCorrect: isCorrect,
+        turnNumber: turnNumber,
+        score: scoreData,
+        guessedLatLong: guessedLatLong,
+        actualLocation: {
+          lat: locationData.latitude,
+          lon: locationData.longitude
+        }
+      });
+      
+      setShowResults(true);
       
       console.log("Guess submitted:", guessedLatLong);
       console.log("Actual location:", { lat: locationData.latitude, lon: locationData.longitude });
       console.log("Distance:", distance.toFixed(2), "miles");
-      
-      alert(
-        `Your guess: ${guessedLatLong.lat.toFixed(4)}°, ${guessedLatLong.lon.toFixed(4)}°\n` +
-        `Actual location: ${locationData.latitude.toFixed(4)}°, ${locationData.longitude.toFixed(4)}°\n` +
-        `Distance: ${distance.toFixed(2)} miles\n\n` +
-        `${isCorrect ? "✓ YES! You were within 100 miles!" : "✗ NO. You were not within 100 miles."}`
-      );
+      console.log("Score:", scoreData);
     } else {
       alert("Please place a marker on the map first!");
     }
@@ -331,7 +354,6 @@ export default function Home() {
     };
   }, [zoom]);
 
-  // Construct satellite image URL from location data
   const satelliteImageUrl = locationData 
     ? `https://jddbikgujwntbkabchjw.supabase.co/storage/v1/object/public/map-images/${locationData.storage_path}/zoom_${formatZoom(satelliteZoom)}.png?date=${dailyId}`
     : '';
@@ -501,6 +523,82 @@ export default function Home() {
           >
             Guess
           </button>
+        )}
+
+        {showResults && gameResults && (
+          <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-50">
+            <div className="bg-zinc-900 rounded-2xl p-8 max-w-md w-full mx-4 border-2 border-zinc-700">
+              <h2 className="text-3xl font-bold text-white text-center mb-6">
+                {gameResults.isCorrect ? "Correct!" : "Not Quite!"}
+              </h2>
+              
+              <div className="space-y-4">
+                <div className="bg-zinc-800 rounded-lg p-4">
+                  <p className="text-zinc-400 text-sm">Distance</p>
+                  <p className="text-white text-2xl font-bold">
+                    {gameResults.distance.toFixed(2)} miles
+                  </p>
+                </div>
+
+                <div className="bg-zinc-800 rounded-lg p-4">
+                  <p className="text-zinc-400 text-sm">Turn</p>
+                  <p className="text-white text-2xl font-bold">
+                    Turn {gameResults.turnNumber} of 4
+                  </p>
+                </div>
+
+                <div className="bg-zinc-800 rounded-lg p-4">
+                  <p className="text-zinc-400 text-sm mb-2">Score Breakdown</p>
+                  <div className="space-y-1 text-sm">
+                    <div className="flex justify-between text-white">
+                      <span>Base Points (Turn {gameResults.turnNumber}):</span>
+                      <span className="font-bold">+{gameResults.score.basePoints}</span>
+                    </div>
+                    {gameResults.score.penalty > 0 && (
+                      <div className="flex justify-between text-red-400">
+                        <span>Distance Penalty ({gameResults.score.distanceRings} × 100 mi):</span>
+                        <span className="font-bold">-{gameResults.score.penalty}</span>
+                      </div>
+                    )}
+                    <div className="border-t border-zinc-600 my-2"></div>
+                    <div className="flex justify-between text-white text-lg">
+                      <span className="font-bold">Final Score:</span>
+                      <span className="font-bold text-green-400">{gameResults.score.finalScore}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-zinc-800 rounded-lg p-4">
+                  <p className="text-zinc-400 text-sm mb-2">Coordinates</p>
+                  <div className="space-y-1 text-xs">
+                    <div className="flex justify-between text-white">
+                      <span>Your Guess:</span>
+                      <span>{gameResults.guessedLatLong.lat.toFixed(4)}°, {gameResults.guessedLatLong.lon.toFixed(4)}°</span>
+                    </div>
+                    <div className="flex justify-between text-green-400">
+                      <span>Actual Location:</span>
+                      <span>{gameResults.actualLocation.lat.toFixed(4)}°, {gameResults.actualLocation.lon.toFixed(4)}°</span>
+                    </div>
+                  </div>
+                </div>
+
+                {gameResults.isCorrect && (
+                  <div className="bg-green-900/30 border border-green-600 rounded-lg p-4 text-center">
+                    <p className="text-green-400 font-bold">
+                      Within 100 miles!
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              <button
+                onClick={() => setShowResults(false)}
+                className="w-full mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
         )}
       </div>
     </>
