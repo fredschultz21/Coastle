@@ -36,7 +36,10 @@ export default function Home() {
   useEffect(() => {
     const fetchLocationData = async () => {
       try {
-        const response = await fetch('http://localhost:3001/data/daily');
+        const backendUrl = window.location.hostname === 'localhost' 
+          ? 'http://localhost:3001' 
+          : 'https://mapzoomgame.onrender.com';
+        const response = await fetch(`${backendUrl}/data/daily`);
         if (!response.ok) {
           throw new Error('Failed to fetch location data');
         }
