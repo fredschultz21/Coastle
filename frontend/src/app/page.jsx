@@ -94,7 +94,7 @@ export default function Home() {
 
   const calculateScore = (turn, distance) => {
     const basePoints = (5 - turn) * 1000;
-    const distanceRings = Math.floor(distance / 100);
+    const distanceRings = Math.floor(distance / 200);
     const penalty = distanceRings * 1000;
     const finalScore = Math.max(0, basePoints - penalty);
     
@@ -262,7 +262,7 @@ export default function Home() {
         locationData.longitude
       );
       
-      const isCorrect = distance <= 100;
+      const isCorrect = distance <= 200;
       const turnNumber = 11 - satelliteZoom;
       const scoreData = calculateScore(turnNumber, distance);
 
@@ -557,7 +557,7 @@ export default function Home() {
                     </div>
                     {gameResults.score.penalty > 0 && (
                       <div className="flex justify-between text-red-400">
-                        <span>Distance Penalty ({gameResults.score.distanceRings} × 100 mi):</span>
+                        <span>Distance Penalty ({gameResults.score.distanceRings} × 200 mi):</span>
                         <span className="font-bold">-{gameResults.score.penalty}</span>
                       </div>
                     )}
@@ -586,7 +586,7 @@ export default function Home() {
                 {gameResults.isCorrect && (
                   <div className="bg-green-900/30 border border-green-600 rounded-lg p-4 text-center">
                     <p className="text-green-400 font-bold">
-                      Within 100 miles!
+                      Within 200 miles!
                     </p>
                   </div>
                 )}
