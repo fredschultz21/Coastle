@@ -389,6 +389,14 @@ export default function Home() {
       </Head>
       
       <div className="relative h-screen w-full overflow-hidden">
+        <div className="absolute top-6 left-6 z-50">
+          <div className="bg-blue-600 px-6 py-3 rounded-lg shadow-lg">
+            <h1 className="text-3xl font-bold">
+              <span className="text-white">Coast</span>
+              <span className="text-cyan-300">le</span>
+            </h1>
+          </div>
+        </div>
         <div className="absolute inset-0">
           <img 
             src={satelliteImageUrl}
