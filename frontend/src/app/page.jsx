@@ -93,7 +93,7 @@ export default function Home() {
   };
 
   const calculateScore = (turn, distance) => {
-    const basePoints = (11 - turn) * 1000;
+    const basePoints = (11 + turn) * 1000;
     const distanceRings = Math.floor(distance / 100);
     const penalty = distanceRings * 1000;
     const finalScore = Math.max(0, basePoints - penalty);
