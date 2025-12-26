@@ -391,7 +391,7 @@ export default function Home() {
       <div className="relative h-screen w-full overflow-hidden">
         <div className="absolute top-4 left-4 z-50">
           <div className="bg-sky-800 px-6 py-3 rounded-lg shadow-lg">
-            <h1 className="text-3xl font-serif font-bold tracking-wide">
+            <h1 className="text-3xl font-sans font-extrabold tracking-wider">
               <span className="text-white">Coastle</span>
             </h1>
           </div>
