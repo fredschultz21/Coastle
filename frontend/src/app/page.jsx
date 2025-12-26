@@ -264,7 +264,8 @@ export default function Home() {
       
       const isCorrect = distance <= 100;
       const turnNumber = 11 - satelliteZoom;
-      const scoreData = calculateScore(satelliteZoom, distance);
+      const scoreData = calculateScore(turnNumber, distance);
+
       
       setGameResults({
         distance: distance,
