@@ -403,9 +403,6 @@ export default function Home() {
 
         {!hasGuessed && (
           <div className="absolute top-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-            <div className="px-4 py-2 bg-black/70 text-white rounded-lg">
-              Current Zoom: {formatZoom(satelliteZoom)}
-            </div>
             <button 
               onClick={handleSatelliteZoomOut}
               disabled={satelliteZoom <= 7}
@@ -415,7 +412,7 @@ export default function Home() {
                   : 'bg-blue-600 hover:bg-blue-700 text-white'
               }`}
             >
-              Zoom Out (Lower Score)
+              Zoom Out
             </button>
           </div>
         )}
