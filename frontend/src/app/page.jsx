@@ -29,8 +29,8 @@ export default function Home() {
 
   const IMAGE_WIDTH = 300;
   const IMAGE_HEIGHT = 225;
-  const MAP_OFFSET_X = 0;
-  const MAP_OFFSET_Y = 0;
+  const MAP_OFFSET_X = -12;
+  const MAP_OFFSET_Y = 8;
   const MAP_WIDTH = 590;
   const MAP_HEIGHT = 417;
 
@@ -70,12 +70,10 @@ export default function Home() {
     const mapY = y - MAP_OFFSET_Y;
     
     const lon = (mapX / imgWidth) * 360 - 180;
-
     let yNorm = mapY / imgHeight;
-
+    yNorm = 0.78 * yNorm - 0.03;
     const mercN = Math.PI * (1 - 2 * yNorm);
     let lat = (180 / Math.PI) * Math.atan(Math.sinh(mercN));
-
     return { lat, lon };
   };
 
