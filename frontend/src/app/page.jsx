@@ -242,10 +242,18 @@ export default function Home() {
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
     }
-    hoverTimeoutRef.current = setTimeout(() => {
+    // Check if it's a touch device (mobile) - close instantly
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) {
       setIsHovered(false);
       handleMouseUp();
-    }, 500);
+    } else {
+      // Desktop - keep the 500ms delay
+      hoverTimeoutRef.current = setTimeout(() => {
+        setIsHovered(false);
+        handleMouseUp();
+      }, 500);
+    }
   };
 
   const handleGuessSubmit = () => {
@@ -453,7 +461,7 @@ useEffect(() => {
         {!isMinimized && (
           <div 
             className={`
-              absolute bottom-6 right-2 md:right-6 
+              absolute bottom-32 md:bottom-6 right-2 md:right-6 
               transition-opacity duration-300 ease-in-out
               ${isHovered ? 'opacity-100' : 'opacity-40'}
             `}
