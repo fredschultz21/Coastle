@@ -21,6 +21,7 @@ export default function Home() {
   const [showResults, setShowResults] = useState(false);
   const [gameResults, setGameResults] = useState(null);
   const [lastPinchDistance, setLastPinchDistance] = useState(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const containerRef = useRef(null);
   const imageRef = useRef(null);
   const pinTimeoutRef = useRef(null);
@@ -182,7 +183,7 @@ export default function Home() {
   };
 
   const handleMapClick = (e) => {
-    if (didDrag) return;
+    if (didDrag || isTransitioning) return;
     
     const container = containerRef.current;
     if (!container) return;
@@ -230,7 +231,9 @@ export default function Home() {
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
     }
+    setIsTransitioning(true);
     setIsHovered(true);
+    setTimeout(() => setIsTransitioning(false), 300);
     if (pinTimeoutRef.current) {
       clearTimeout(pinTimeoutRef.current);
     }
