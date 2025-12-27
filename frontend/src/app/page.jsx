@@ -402,8 +402,14 @@ export default function Home() {
       <div className="relative h-screen w-full overflow-hidden">
         <div className="absolute top-4 md:top-6 left-4 md:left-6 z-50">
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-            <span className="text-white">Coastle</span>
+            <span className="text-white">coastle</span>
           </h1>
+        </div>
+        <div className="absolute top-4 md:top-6 right-4 md:right-6 z-50">
+          <p className="text-sm md:text-base font-semibold tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] text-white text-right">
+            daily game for<br />
+            {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+          </p>
         </div>
         <div className="absolute inset-0">
           <img 
@@ -550,19 +556,19 @@ export default function Home() {
             <button 
               onClick={handleSatelliteZoomOut}
               disabled={satelliteZoom <= 7}
-              className={`px-6 md:px-8 py-4 md:py-3 font-bold text-base md:text-lg rounded-lg shadow-lg transition-colors min-w-[120px] md:min-w-0 ${
+              className={`w-[140px] md:w-[150px] py-4 md:py-3 font-bold text-base md:text-lg rounded-lg shadow-lg transition-colors ${
                 satelliteZoom <= 7 
                   ? 'bg-gray-700 cursor-not-allowed' 
                   : 'bg-sky-900 hover:bg-sky-700 text-white active:bg-sky-600'
               }`}
             >
-              Zoom Out
+              zoom out
             </button>
             <button 
               onClick={handleGuessSubmit}
-              className="px-8 md:px-10 py-4 md:py-3 bg-red-800 hover:bg-red-700 active:bg-red-600 text-white font-bold text-base md:text-lg rounded-lg shadow-lg transition-colors min-w-[120px] md:min-w-0"
+              className="w-[140px] md:w-[150px] py-4 md:py-3 bg-red-800 hover:bg-red-700 active:bg-red-600 text-white font-bold text-base md:text-lg rounded-lg shadow-lg transition-colors"
             >
-              Guess
+              guess
             </button>
           </div>
         )}
