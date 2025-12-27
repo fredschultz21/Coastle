@@ -185,8 +185,7 @@ export default function Home() {
     if (didDrag) return;
     
     const container = containerRef.current;
-    const image = imageRef.current;
-    if (!container || !image) return;
+    if (!container) return;
 
     let clientX, clientY;
     if (e.touches?.[0]) {
@@ -200,16 +199,12 @@ export default function Home() {
       clientY = e.clientY;
     }
 
-    const imageRect = image.getBoundingClientRect();
-    
-    const clickX = clientX - imageRect.left;
-    const clickY = clientY - imageRect.top;
-    
-    const scaleX = image.naturalWidth / imageRect.width;
-    const scaleY = image.naturalHeight / imageRect.height;
-    
-    const imageX = clickX * scaleX;
-    const imageY = clickY * scaleY;
+    const rect = container.getBoundingClientRect();
+    const clickX = clientX - rect.left;
+    const clickY = clientY - rect.top;
+
+    const imageX = (clickX - position.x) / zoom;
+    const imageY = (clickY - position.y) / zoom;
 
     setGuessMarker({ x: imageX, y: imageY });
   };
