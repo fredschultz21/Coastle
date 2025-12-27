@@ -31,7 +31,7 @@ export default function Home() {
   const IMAGE_HEIGHT = 225;
   const MAP_OFFSET_X = -12;
   const MAP_OFFSET_Y = 5;
-  const MAP_WIDTH = 520;
+  const MAP_WIDTH = 5280;
   const MAP_HEIGHT = 417;
 
   const dailyId = new Date().toISOString().split('T')[0];
@@ -69,7 +69,7 @@ export default function Home() {
     const mapX = x - MAP_OFFSET_X;
     const mapY = y - MAP_OFFSET_Y;
     
-    const lon = (mapX / imgWidth) * 360 - 180;
+    const lon = (mapX / (imgWidth * 0.93)) * 360 - 180;
 
     let yNorm = mapY / imgHeight;
 
