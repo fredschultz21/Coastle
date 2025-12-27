@@ -152,28 +152,6 @@ export default function Home() {
     setPosition({ x: 0, y: 0 });
   };
 
-  const getImageRelativeCoords = (clientX, clientY) => {
-    const container = containerRef.current;
-    const image = imageRef.current;
-    if (!container || !image) return null;
-
-    const containerRect = container.getBoundingClientRect();
-    
-    const clickX = clientX - containerRect.left;
-    const clickY = clientY - containerRect.top;
-    
-    const transformedX = (clickX - position.x) / zoom;
-    const transformedY = (clickY - position.y) / zoom;
-    
-    const scaleX = image.naturalWidth / containerRect.width;  
-    const scaleY = image.naturalHeight / containerRect.height;
-    
-    const imageX = transformedX * scaleX;
-    const imageY = transformedY * scaleY;
-
-    return { imageX, imageY };
-  };
-
   const handleWheel = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -207,13 +185,14 @@ export default function Home() {
     if (didDrag) return;
     
     const container = containerRef.current;
-    if (!container) return;
+    const image = imageRef.current;
+    if (!container || !image) return;
 
     let clientX, clientY;
-    if (e.touches && e.touches.length > 0) {
+    if (e.touches?.[0]) {
       clientX = e.touches[0].clientX;
       clientY = e.touches[0].clientY;
-    } else if (e.changedTouches && e.changedTouches.length > 0) {
+    } else if (e.changedTouches?.[0]) {
       clientX = e.changedTouches[0].clientX;
       clientY = e.changedTouches[0].clientY;
     } else {
@@ -221,10 +200,18 @@ export default function Home() {
       clientY = e.clientY;
     }
 
-    const coords = getImageRelativeCoords(clientX, clientY);
-    if (!coords) return;
+    const imageRect = image.getBoundingClientRect();
+    
+    const clickX = clientX - imageRect.left;
+    const clickY = clientY - imageRect.top;
+    
+    const scaleX = image.naturalWidth / imageRect.width;
+    const scaleY = image.naturalHeight / imageRect.height;
+    
+    const imageX = clickX * scaleX;
+    const imageY = clickY * scaleY;
 
-    setGuessMarker({ x: coords.imageX, y: coords.imageY });
+    setGuessMarker({ x: imageX, y: imageY });
   };
 
   const handleMapTouch = (e) => {
@@ -606,14 +593,6 @@ useEffect(() => {
                   }
                   if (e.touches.length === 0) {
                     handleMouseUp();
-                    // Place marker on single tap (not drag)
-                    if (!didDrag && e.changedTouches.length === 1) {
-                      const touch = e.changedTouches[0];
-                      const coords = getImageRelativeCoords(touch.clientX, touch.clientY);
-                      if (coords) {
-                        setGuessMarker({ x: coords.imageX, y: coords.imageY });
-                      }
-                    }
                   }
                 }}
                 onWheel={handleWheel}
