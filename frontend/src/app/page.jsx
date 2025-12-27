@@ -206,6 +206,24 @@ export default function Home() {
     setGuessMarker({ x: imageX, y: imageY });
   };
 
+  const handleMapTouch = (e) => {
+    if (didDrag) return;
+    if (e.touches.length !== 1) return; // Only single tap
+    
+    const container = containerRef.current;
+    if (!container) return;
+
+    const rect = container.getBoundingClientRect();
+    const touch = e.touches[0];
+    const clickX = touch.clientX - rect.left;
+    const clickY = touch.clientY - rect.top;
+
+    const imageX = (clickX - position.x) / zoom;
+    const imageY = (clickY - position.y) / zoom;
+
+    setGuessMarker({ x: imageX, y: imageY });
+  };
+
   const handleMouseDown = (e) => {
     e.preventDefault();
     setIsDragging(true);
@@ -448,6 +466,12 @@ useEffect(() => {
             -webkit-user-select: text;
             user-select: text;
           }
+          img[alt="World Map"] {
+            image-rendering: -moz-crisp-edges;
+            image-rendering: -webkit-crisp-edges;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+          }
         `}</style>
       </Head>
       
@@ -555,7 +579,26 @@ useEffect(() => {
                     });
                   }
                 }}
-                onTouchEnd={handleMouseUp}
+                onTouchEnd={(e) => {
+                  if (e.touches.length < 2) {
+                    setLastPinchDistance(null);
+                  }
+                  if (e.touches.length === 0) {
+                    handleMouseUp();
+                    // Place marker on single tap (not drag)
+                    if (!didDrag && e.changedTouches.length === 1) {
+                      const container = containerRef.current;
+                      if (!container) return;
+                      const rect = container.getBoundingClientRect();
+                      const touch = e.changedTouches[0];
+                      const clickX = touch.clientX - rect.left;
+                      const clickY = touch.clientY - rect.top;
+                      const imageX = (clickX - position.x) / zoom;
+                      const imageY = (clickY - position.y) / zoom;
+                      setGuessMarker({ x: imageX, y: imageY });
+                    }
+                  }
+                }}
                 onWheel={handleWheel}
                 onClick={handleMapClick}
               >
