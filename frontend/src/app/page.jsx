@@ -502,7 +502,7 @@ useEffect(() => {
                 ref={containerRef}
                 className={`
                   overflow-hidden relative
-                  ${isHovered ? 'w-[90vw] h-[60vh] md:w-[640px] md:h-[432px]' : 'w-[140px] h-[100px] md:w-[176px] md:h-[128px]'}
+                  ${isHovered ? 'w-[85vw] h-[60vh] md:w-[640px] md:h-[432px]' : 'w-[140px] h-[100px] md:w-[176px] md:h-[128px]'}
                   transition-all duration-300
                   cursor-crosshair
                 `}
