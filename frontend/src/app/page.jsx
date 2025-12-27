@@ -188,8 +188,17 @@ export default function Home() {
     if (!container) return;
 
     const rect = container.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const clickY = e.clientY - rect.top;
+    let clickX, clickY;
+    if (e.touches && e.touches.length > 0) {
+      clickX = e.touches[0].clientX - rect.left;
+      clickY = e.touches[0].clientY - rect.top;
+    } else if (e.changedTouches && e.changedTouches.length > 0) {
+      clickX = e.changedTouches[0].clientX - rect.left;
+      clickY = e.changedTouches[0].clientY - rect.top;
+    } else {
+      clickX = e.clientX - rect.left;
+      clickY = e.clientY - rect.top;
+    }
 
     const imageX = (clickX - position.x) / zoom;
     const imageY = (clickY - position.y) / zoom;
