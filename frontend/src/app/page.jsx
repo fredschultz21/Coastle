@@ -276,9 +276,8 @@ export default function Home() {
       
       const containerRect = container.getBoundingClientRect();
       
-      const imageRect = image.getBoundingClientRect();
-      const currentWidth = imageRect.width / zoom;
-      const currentHeight = imageRect.height / zoom;
+      const currentWidth = guessMarker.containerWidth;
+      const currentHeight = guessMarker.containerHeight;
       
       const scaleX = image.naturalWidth / currentWidth;
       const scaleY = image.naturalHeight / currentHeight;
