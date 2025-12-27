@@ -523,7 +523,7 @@ export default function Home() {
         {!hasGuessed && (
           <button 
             onClick={handleGuessSubmit}
-            className="absolute bottom-6 left-1/2 -translate-x-1/2 px-8 py-3 bg-red-900 hover:bg-red-800 text-white font-bold text-lg rounded-lg shadow-lg transition-colors"
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 px-8 py-3 bg-red-850 hover:bg-red-800 text-white font-bold text-lg rounded-lg shadow-lg transition-colors"
           >
             Guess
           </button>
