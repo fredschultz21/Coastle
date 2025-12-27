@@ -185,30 +185,18 @@ export default function Home() {
     if (didDrag) return;
     
     const container = containerRef.current;
-    const image = imageRef.current;
-    if (!container || !image) return;
+    if (!container) return;
 
     const touch = e.touches?.[0] || e.changedTouches?.[0];
     const clientX = touch ? touch.clientX : e.clientX;
     const clientY = touch ? touch.clientY : e.clientY;
 
-    const containerRect = container.getBoundingClientRect();
-    const imageRect = image.getBoundingClientRect();
+    const rect = container.getBoundingClientRect();
+    const clickX = clientX - rect.left;
+    const clickY = clientY - rect.top;
 
-    const offsetX = imageRect.left - containerRect.left;
-    const offsetY = imageRect.top - containerRect.top;
-
-    const clickX = clientX - containerRect.left - offsetX;
-    const clickY = clientY - containerRect.top - offsetY;
-
-    const transformedX = (clickX - position.x) / zoom;
-    const transformedY = (clickY - position.y) / zoom;
-
-    const scaleX = image.naturalWidth / imageRect.width;
-    const scaleY = image.naturalHeight / imageRect.height;
-
-    const imageX = transformedX * scaleX;
-    const imageY = transformedY * scaleY;
+    const imageX = (clickX - position.x) / zoom;
+    const imageY = (clickY - position.y) / zoom;
 
     setGuessMarker({ x: imageX, y: imageY });
   };
@@ -277,9 +265,10 @@ export default function Home() {
       const container = containerRef.current;
       if (!image || !container) return;
       
-      const imageRect = image.getBoundingClientRect();
-      const scaleX = image.naturalWidth / imageRect.width;
-      const scaleY = image.naturalHeight / imageRect.height;
+      const containerRect = container.getBoundingClientRect();
+      
+      const scaleX = image.naturalWidth / containerRect.width;
+      const scaleY = image.naturalHeight / containerRect.height;
       
       const scaledX = guessMarker.x * scaleX;
       const scaledY = guessMarker.y * scaleY;
