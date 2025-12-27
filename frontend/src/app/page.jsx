@@ -261,21 +261,23 @@ export default function Home() {
 
   const handleGuessSubmit = () => {
     if (guessMarker && locationData) {
+      const container = containerRef.current;
       const image = imageRef.current;
-      if (!image) return;
+      if (!container || !image) return;
+      
+      const containerRect = container.getBoundingClientRect();
       
       const imageRect = image.getBoundingClientRect();
+      const currentWidth = imageRect.width / zoom;
+      const currentHeight = imageRect.height / zoom;
       
-      const baseWidth = imageRect.width / zoom;
-      const baseHeight = imageRect.height / zoom;
+      const scaleX = image.naturalWidth / currentWidth;
+      const scaleY = image.naturalHeight / currentHeight;
       
-      const scaleX = image.naturalWidth / baseWidth;
-      const scaleY = image.naturalHeight / baseHeight;
+      const naturalX = guessMarker.x * scaleX;
+      const naturalY = guessMarker.y * scaleY;
       
-      const scaledX = guessMarker.x * scaleX;
-      const scaledY = guessMarker.y * scaleY;
-      
-      const guessedLatLong = pixelToLatLong(scaledX, scaledY);
+      const guessedLatLong = pixelToLatLong(naturalX, naturalY);
       setGuessLatLong(guessedLatLong);
       setHasGuessed(true);
       setSatelliteZoom(3);
@@ -309,6 +311,10 @@ export default function Home() {
       console.log("Actual location:", { lat: locationData.latitude, lon: locationData.longitude });
       console.log("Distance:", distance.toFixed(2), "miles");
       console.log("Score:", scoreData);
+      console.log("Container size:", currentWidth, "×", currentHeight);
+      console.log("Scale:", scaleX, scaleY);
+      console.log("Marker coords:", guessMarker.x, guessMarker.y);
+      console.log("Natural coords:", naturalX, naturalY);
     } else {
       alert("Please place a marker on the map first!");
     }
