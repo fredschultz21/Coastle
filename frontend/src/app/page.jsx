@@ -503,7 +503,7 @@ useEffect(() => {
                 ref={containerRef}
                 className={`
                   overflow-hidden relative
-                  ${isHovered ? 'w-[85vw] h-[60vh] md:w-[640px] md:h-[432px]' : 'w-[140px] h-[100px] md:w-[176px] md:h-[128px]'}
+                  ${isHovered ? 'w-[85vw] aspect-[40/27] md:w-[640px] md:h-[432px]' : 'w-[140px] h-[100px] md:w-[176px] md:h-[128px]'}
                   transition-all duration-300
                   cursor-crosshair
                 `}
@@ -511,58 +511,15 @@ useEffect(() => {
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
                 onTouchStart={(e) => {
-                  if (e.touches.length === 2) {
-                    // Pinch zoom start
-                    const touch1 = e.touches[0];
-                    const touch2 = e.touches[1];
-                    const distance = Math.hypot(
-                      touch2.clientX - touch1.clientX,
-                      touch2.clientY - touch1.clientY
-                    );
-                    setLastPinchDistance(distance);
-                  } else if (e.touches.length === 1) {
-                    // Single touch drag
-                    const touch = e.touches[0];
-                    handleMouseDown({ 
-                      preventDefault: () => e.preventDefault(),
-                      clientX: touch.clientX, 
-                      clientY: touch.clientY 
-                    });
-                  }
+                  const touch = e.touches[0];
+                  handleMouseDown({ 
+                    preventDefault: () => e.preventDefault(),
+                    clientX: touch.clientX, 
+                    clientY: touch.clientY 
+                  });
                 }}
                 onTouchMove={(e) => {
-                  if (e.touches.length === 2 && lastPinchDistance) {
-                    // Pinch zoom
-                    e.preventDefault();
-                    const touch1 = e.touches[0];
-                    const touch2 = e.touches[1];
-                    const distance = Math.hypot(
-                      touch2.clientX - touch1.clientX,
-                      touch2.clientY - touch1.clientY
-                    );
-                    
-                    const container = containerRef.current;
-                    if (!container) return;
-                    
-                    const rect = container.getBoundingClientRect();
-                    const centerX = (touch1.clientX + touch2.clientX) / 2 - rect.left;
-                    const centerY = (touch1.clientY + touch2.clientY) / 2 - rect.top;
-                    
-                    const delta = distance > lastPinchDistance ? 0.5 : -0.5;
-                    const newZoom = Math.max(1, Math.min(15, zoom + delta));
-                    
-                    if (newZoom !== zoom) {
-                      const zoomRatio = newZoom / zoom;
-                      const newX = centerX - (centerX - position.x) * zoomRatio;
-                      const newY = centerY - (centerY - position.y) * zoomRatio;
-                      
-                      setZoom(newZoom);
-                      setPosition({ x: newX, y: newY });
-                    }
-                    
-                    setLastPinchDistance(distance);
-                  } else if (e.touches.length === 1) {
-                    // Single touch drag
+                  if (e.touches.length === 1) {
                     const touch = e.touches[0];
                     handleMouseMove({ 
                       preventDefault: () => e.preventDefault(),
@@ -571,14 +528,7 @@ useEffect(() => {
                     });
                   }
                 }}
-                onTouchEnd={(e) => {
-                  if (e.touches.length < 2) {
-                    setLastPinchDistance(null);
-                  }
-                  if (e.touches.length === 0) {
-                    handleMouseUp();
-                  }
-                }}
+                onTouchEnd={handleMouseUp}
                 onWheel={handleWheel}
                 onClick={handleMapClick}
               >
