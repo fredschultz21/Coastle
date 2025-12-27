@@ -192,9 +192,8 @@ export default function Home() {
     const clientX = touch ? touch.clientX : e.clientX;
     const clientY = touch ? touch.clientY : e.clientY;
 
-    const rect = container.getBoundingClientRect();
-    const clickX = clientX - rect.left;
-    const clickY = clientY - rect.top;
+    const currentWidth = guessMarker.containerWidth;
+    const currentHeight = guessMarker.containerHeight;
 
     const imageX = (clickX - position.x) / zoom;
     const imageY = (clickY - position.y) / zoom;
