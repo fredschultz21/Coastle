@@ -427,11 +427,11 @@ useEffect(() => {
             {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
           </p>
         </div>
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-zinc-900">
           <img 
             src={satelliteImageUrl}
             alt="Satellite View"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover portrait:object-contain"
           />
           {/* Center crosshair */}
           <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
@@ -568,7 +568,7 @@ useEffect(() => {
         )}
 
         {!hasGuessed && (
-          <div className="absolute bottom-20 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 md:gap-3 px-4">
+          <div className="absolute bottom-20 portrait:top-6 portrait:bottom-auto md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 md:gap-3 px-4 z-50">
             <button 
               onClick={handleSatelliteZoomOut}
               disabled={satelliteZoom <= 7}
