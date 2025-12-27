@@ -185,21 +185,15 @@ export default function Home() {
     if (didDrag) return;
     
     const container = containerRef.current;
-    const image = imageRef.current;
-    if (!container || !image) return;
+    if (!container) return;
 
     const touch = e.touches?.[0] || e.changedTouches?.[0];
     const clientX = touch ? touch.clientX : e.clientX;
     const clientY = touch ? touch.clientY : e.clientY;
 
-    const containerRect = container.getBoundingClientRect();
-    const imageRect = image.getBoundingClientRect();
-
-    const offsetX = imageRect.left - containerRect.left;
-    const offsetY = imageRect.top - containerRect.top;
-
-    const clickX = clientX - containerRect.left - offsetX;
-    const clickY = clientY - containerRect.top - offsetY;
+    const rect = container.getBoundingClientRect();
+    const clickX = clientX - rect.left;
+    const clickY = clientY - rect.top;
 
     const imageX = (clickX - position.x) / zoom;
     const imageY = (clickY - position.y) / zoom;
@@ -537,7 +531,7 @@ useEffect(() => {
                 ref={containerRef}
                 className={`
                   overflow-hidden relative
-                  ${isHovered ? 'w-[90vw] h-[60vh] md:w-[640px] md:h-[432px]' : 'w-[140px] h-[100px] md:w-[176px] md:h-[128px]'}
+                  ${isHovered ? 'w-[85vw] aspect-[40/27] md:w-[640px] md:h-[432px]' : 'w-[140px] h-[100px] md:w-[176px] md:h-[128px]'}
                   transition-all duration-300
                   cursor-crosshair
                 `}
