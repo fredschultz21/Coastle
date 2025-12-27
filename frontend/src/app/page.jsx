@@ -29,7 +29,7 @@ export default function Home() {
 
   const IMAGE_WIDTH = 300;
   const IMAGE_HEIGHT = 225;
-  const MAP_OFFSET_X = -8;
+  const MAP_OFFSET_X = -12;
   const MAP_OFFSET_Y = 5;
   const MAP_WIDTH = 590;
   const MAP_HEIGHT = 417;
