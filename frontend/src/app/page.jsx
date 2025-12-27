@@ -209,8 +209,14 @@ export default function Home() {
     const clickX = clientX - containerRect.left - offsetX;
     const clickY = clientY - containerRect.top - offsetY;
 
-    const imageX = (clickX - position.x) / zoom;
-    const imageY = (clickY - position.y) / zoom;
+    const transformedX = (clickX - position.x) / zoom;
+    const transformedY = (clickY - position.y) / zoom;
+    
+    const scaleX = image.naturalWidth / imageRect.width;
+    const scaleY = image.naturalHeight / imageRect.height;
+    
+    const imageX = transformedX * scaleX;
+    const imageY = transformedY * scaleY;
 
     setGuessMarker({ x: imageX, y: imageY });
   };
