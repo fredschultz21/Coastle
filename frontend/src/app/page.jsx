@@ -183,7 +183,7 @@ export default function Home() {
   };
 
   const handleMapClick = (e) => {
-    if (didDrag || isTransitioning) return;
+    if (didDrag) return;
     
     const container = containerRef.current;
     if (!container) return;
@@ -192,13 +192,20 @@ export default function Home() {
     const clientX = touch ? touch.clientX : e.clientX;
     const clientY = touch ? touch.clientY : e.clientY;
 
-    const currentWidth = guessMarker.containerWidth;
-    const currentHeight = guessMarker.containerHeight;
+    const rect = container.getBoundingClientRect();
+    const clickX = clientX - rect.left;
+    const clickY = clientY - rect.top;
 
     const imageX = (clickX - position.x) / zoom;
     const imageY = (clickY - position.y) / zoom;
 
-    setGuessMarker({ x: imageX, y: imageY });
+    setGuessMarker({ 
+      x: imageX, 
+      y: imageY,
+      containerWidth: rect.width,
+      containerHeight: rect.height,
+      currentZoom: zoom
+    });
   };
 
   const handleMouseDown = (e) => {
