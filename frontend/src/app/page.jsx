@@ -31,7 +31,7 @@ export default function Home() {
   const IMAGE_HEIGHT = 225;
   const MAP_OFFSET_X = -12;
   const MAP_OFFSET_Y = 5;
-  const MAP_WIDTH = 580;
+  const MAP_WIDTH = 620;
   const MAP_HEIGHT = 417;
 
   const dailyId = new Date().toISOString().split('T')[0];
