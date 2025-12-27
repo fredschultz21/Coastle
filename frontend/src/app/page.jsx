@@ -69,7 +69,7 @@ export default function Home() {
     const mapX = x - MAP_OFFSET_X;
     const mapY = y - MAP_OFFSET_Y;
     
-    const lon = (mapX / (imgWidth * 0.93)) * 360 - 180;
+    const lon = (mapX / (imgWidth * 0.93)) * 360 - 198;
 
     let yNorm = mapY / imgHeight;
 
