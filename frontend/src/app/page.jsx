@@ -64,6 +64,24 @@ export default function Home() {
   const MERCATOR_COEFFICIENT = 0;
   const LATITUDE_SCALE = 1.0;
 
+  const handleGuessSubmit = () => {
+    if (guessMarker && locationData) {
+      let adjustedX = guessMarker.x;
+      let adjustedY = guessMarker.y;
+      
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) {
+        const image = imageRef.current;
+        if (image) {
+          const scale = image.naturalWidth / 600;
+          adjustedX = guessMarker.x * scale;
+          adjustedY = guessMarker.y * scale;
+        }
+      }
+      
+      const guessedLatLong = pixelToLatLong(adjustedX, adjustedY);
+  };
+
   const pixelToLatLong = (x, y) => {
     const mapX = x - MAP_OFFSET_X;
     const mapY = y - MAP_OFFSET_Y;
@@ -185,18 +203,30 @@ export default function Home() {
     if (didDrag) return;
     
     const container = containerRef.current;
-    if (!container) return;
+    const image = imageRef.current;
+    if (!container || !image) return;
 
     const touch = e.touches?.[0] || e.changedTouches?.[0];
     const clientX = touch ? touch.clientX : e.clientX;
     const clientY = touch ? touch.clientY : e.clientY;
 
-    const rect = container.getBoundingClientRect();
-    const clickX = clientX - rect.left;
-    const clickY = clientY - rect.top;
+    const containerRect = container.getBoundingClientRect();
+    const imageRect = image.getBoundingClientRect();
 
-    const imageX = (clickX - position.x) / zoom;
-    const imageY = (clickY - position.y) / zoom;
+    const offsetX = imageRect.left - containerRect.left;
+    const offsetY = imageRect.top - containerRect.top;
+
+    const clickX = clientX - containerRect.left - offsetX;
+    const clickY = clientY - containerRect.top - offsetY;
+
+    const transformedX = (clickX - position.x) / zoom;
+    const transformedY = (clickY - position.y) / zoom;
+
+    const scaleX = image.naturalWidth / imageRect.width;
+    const scaleY = image.naturalHeight / imageRect.height;
+
+    const imageX = transformedX * scaleX;
+    const imageY = transformedY * scaleY;
 
     setGuessMarker({ x: imageX, y: imageY });
   };
