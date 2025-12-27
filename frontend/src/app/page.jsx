@@ -496,14 +496,14 @@ useEffect(() => {
             alt="Satellite View"
             className="h-full w-full object-cover portrait:object-contain"
           />
-          {/* Center crosshair */}
+    
           <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
             <div className="relative">
-              {/* Horizontal line */}
+        
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 md:w-12 h-0.5 bg-white shadow-lg"></div>
-              {/* Vertical line */}
+              
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-8 md:h-12 w-0.5 bg-white shadow-lg"></div>
-              {/* Center dot */}
+        
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-white rounded-full shadow-lg"></div>
             </div>
           </div>
