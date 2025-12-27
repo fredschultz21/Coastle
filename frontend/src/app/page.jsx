@@ -281,12 +281,14 @@ export default function Home() {
       const naturalX = guessMarker.x * scaleX;
       const naturalY = guessMarker.y * scaleY;
 
+      /*
       alert(`Debug Info:
         Natural coords: ${naturalX.toFixed(2)}, ${naturalY.toFixed(2)}
         Image dimensions: ${image.naturalWidth} × ${image.naturalHeight}
         Rendered size: ${currentWidth.toFixed(2)} × ${currentHeight.toFixed(2)}
         Scale factors: ${scaleX.toFixed(4)} × ${scaleY.toFixed(4)}
         Marker in container: ${guessMarker.x.toFixed(2)}, ${guessMarker.y.toFixed(2)}`);
+      */
       
       const guessedLatLong = pixelToLatLong(naturalX, naturalY, image.naturalWidth, image.naturalHeight);
       setGuessLatLong(guessedLatLong);
@@ -318,14 +320,6 @@ export default function Home() {
       
       setShowResults(true);
       
-      console.log("Guess submitted:", guessedLatLong);
-      console.log("Actual location:", { lat: locationData.latitude, lon: locationData.longitude });
-      console.log("Distance:", distance.toFixed(2), "miles");
-      console.log("Score:", scoreData);
-      console.log("Container size:", currentWidth, "×", currentHeight);
-      console.log("Scale:", scaleX, scaleY);
-      console.log("Marker coords:", guessMarker.x, guessMarker.y);
-      console.log("Natural coords:", naturalX, naturalY);
     } else {
       alert("Please place a marker on the map first!");
     }
