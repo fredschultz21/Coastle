@@ -20,6 +20,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [showResults, setShowResults] = useState(false);
   const [gameResults, setGameResults] = useState(null);
+  const [lastPinchDistance, setLastPinchDistance] = useState(null);
   const containerRef = useRef(null);
   const imageRef = useRef(null);
   const pinTimeoutRef = useRef(null);
@@ -454,7 +455,7 @@ useEffect(() => {
           </div>
         </div>
 
-        <p className="absolute bottom-2 md:bottom-4 left-2 md:left-4 text-[10px] md:text-xs text-white/80 z-10 drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
+        <p className="absolute bottom-28 md:bottom-4 left-2 md:left-4 text-[10px] md:text-xs text-white/80 z-10 drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
           © Mapbox © OpenStreetMap contributors © Maxar
         </p>
 
@@ -510,15 +511,58 @@ useEffect(() => {
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
                 onTouchStart={(e) => {
-                  const touch = e.touches[0];
-                  handleMouseDown({ 
-                    preventDefault: () => e.preventDefault(),
-                    clientX: touch.clientX, 
-                    clientY: touch.clientY 
-                  });
+                  if (e.touches.length === 2) {
+                    // Pinch zoom start
+                    const touch1 = e.touches[0];
+                    const touch2 = e.touches[1];
+                    const distance = Math.hypot(
+                      touch2.clientX - touch1.clientX,
+                      touch2.clientY - touch1.clientY
+                    );
+                    setLastPinchDistance(distance);
+                  } else if (e.touches.length === 1) {
+                    // Single touch drag
+                    const touch = e.touches[0];
+                    handleMouseDown({ 
+                      preventDefault: () => e.preventDefault(),
+                      clientX: touch.clientX, 
+                      clientY: touch.clientY 
+                    });
+                  }
                 }}
                 onTouchMove={(e) => {
-                  if (e.touches.length === 1) {
+                  if (e.touches.length === 2 && lastPinchDistance) {
+                    // Pinch zoom
+                    e.preventDefault();
+                    const touch1 = e.touches[0];
+                    const touch2 = e.touches[1];
+                    const distance = Math.hypot(
+                      touch2.clientX - touch1.clientX,
+                      touch2.clientY - touch1.clientY
+                    );
+                    
+                    const container = containerRef.current;
+                    if (!container) return;
+                    
+                    const rect = container.getBoundingClientRect();
+                    const centerX = (touch1.clientX + touch2.clientX) / 2 - rect.left;
+                    const centerY = (touch1.clientY + touch2.clientY) / 2 - rect.top;
+                    
+                    const delta = distance > lastPinchDistance ? 0.5 : -0.5;
+                    const newZoom = Math.max(1, Math.min(15, zoom + delta));
+                    
+                    if (newZoom !== zoom) {
+                      const zoomRatio = newZoom / zoom;
+                      const newX = centerX - (centerX - position.x) * zoomRatio;
+                      const newY = centerY - (centerY - position.y) * zoomRatio;
+                      
+                      setZoom(newZoom);
+                      setPosition({ x: newX, y: newY });
+                    }
+                    
+                    setLastPinchDistance(distance);
+                  } else if (e.touches.length === 1) {
+                    // Single touch drag
                     const touch = e.touches[0];
                     handleMouseMove({ 
                       preventDefault: () => e.preventDefault(),
@@ -527,7 +571,14 @@ useEffect(() => {
                     });
                   }
                 }}
-                onTouchEnd={handleMouseUp}
+                onTouchEnd={(e) => {
+                  if (e.touches.length < 2) {
+                    setLastPinchDistance(null);
+                  }
+                  if (e.touches.length === 0) {
+                    handleMouseUp();
+                  }
+                }}
                 onWheel={handleWheel}
                 onClick={handleMapClick}
               >
