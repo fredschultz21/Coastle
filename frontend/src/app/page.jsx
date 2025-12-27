@@ -65,17 +65,16 @@ export default function Home() {
   const MERCATOR_COEFFICIENT = 0;
   const LATITUDE_SCALE = 1.0;
 
-  const pixelToLatLong = (x, y, imgWidth = MAP_WIDTH, imgHeight = MAP_HEIGHT) => {
-    const mapX = x - MAP_OFFSET_X;
-    const mapY = y - MAP_OFFSET_Y;
-    
-    const lon = (mapX / imgWidth) * 360 - 180;
-    let yNorm = mapY / imgHeight;
-    yNorm = 0.70 * yNorm - 0.12;
+  const pixelToLatLong = (x, y) => {
+    const lon = (x / MAP_WIDTH) * 360 - 180;
+
+    const yNorm = y / MAP_HEIGHT;
     const mercN = Math.PI * (1 - 2 * yNorm);
-    let lat = (180 / Math.PI) * Math.atan(Math.sinh(mercN));
+    const lat = (180 / Math.PI) * Math.atan(Math.sinh(mercN));
+
     return { lat, lon };
   };
+
 
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
     const R = 3959;
