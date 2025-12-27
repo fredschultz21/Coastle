@@ -64,13 +64,13 @@ export default function Home() {
   const MERCATOR_COEFFICIENT = 0;
   const LATITUDE_SCALE = 1.0;
 
-  const pixelToLatLong = (x, y) => {
+  const pixelToLatLong = (x, y, imgWidth = MAP_WIDTH, imgHeight = MAP_HEIGHT) => {
     const mapX = x - MAP_OFFSET_X;
     const mapY = y - MAP_OFFSET_Y;
     
-    const lon = (mapX / MAP_WIDTH) * 360 - 180;
+    const lon = (mapX / imgWidth) * 360 - 180;
 
-    let yNorm = mapY / MAP_HEIGHT;
+    let yNorm = mapY / imgHeight;
 
     yNorm = 0.71 * yNorm + 0.01;
 
@@ -284,7 +284,7 @@ export default function Home() {
         Scale factors: ${scaleX.toFixed(4)} × ${scaleY.toFixed(4)}
         Marker in container: ${guessMarker.x.toFixed(2)}, ${guessMarker.y.toFixed(2)}`);
       
-      const guessedLatLong = pixelToLatLong(naturalX, naturalY);
+      const guessedLatLong = pixelToLatLong(naturalX, naturalY, image.naturalWidth, image.naturalHeight);
       setGuessLatLong(guessedLatLong);
       setHasGuessed(true);
       setSatelliteZoom(3);
