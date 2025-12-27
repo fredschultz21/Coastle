@@ -73,7 +73,7 @@ export default function Home() {
 
     let yNorm = mapY / imgHeight;
 
-    yNorm = 0.75 * yNorm - 0.08;
+    yNorm = 0.63 * yNorm + 0.05;
 
     const mercN = Math.PI * (1 - 2 * yNorm);
     let lat = (180 / Math.PI) * Math.atan(Math.sinh(mercN));
