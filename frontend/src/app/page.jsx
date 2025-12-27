@@ -64,24 +64,6 @@ export default function Home() {
   const MERCATOR_COEFFICIENT = 0;
   const LATITUDE_SCALE = 1.0;
 
-  const handleGuessSubmit = () => {
-    if (guessMarker && locationData) {
-      let adjustedX = guessMarker.x;
-      let adjustedY = guessMarker.y;
-      
-      const isMobile = window.innerWidth < 768;
-      if (isMobile) {
-        const image = imageRef.current;
-        if (image) {
-          const scale = image.naturalWidth / 600;
-          adjustedX = guessMarker.x * scale;
-          adjustedY = guessMarker.y * scale;
-        }
-      }
-      
-      const guessedLatLong = pixelToLatLong(adjustedX, adjustedY);
-  };
-
   const pixelToLatLong = (x, y) => {
     const mapX = x - MAP_OFFSET_X;
     const mapY = y - MAP_OFFSET_Y;
@@ -277,13 +259,11 @@ export default function Home() {
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
     }
-    // Check if it's a touch device (mobile) - close instantly
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     if (isTouchDevice) {
       setIsHovered(false);
       handleMouseUp();
     } else {
-      // Desktop - keep the 500ms delay
       hoverTimeoutRef.current = setTimeout(() => {
         setIsHovered(false);
         handleMouseUp();
