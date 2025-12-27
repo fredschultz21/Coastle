@@ -415,7 +415,7 @@ export default function Home() {
               className={`px-6 py-3 font-bold text-lg rounded-lg shadow-lg transition-colors ${
                 satelliteZoom <= 7 
                   ? 'bg-gray-700 cursor-not-allowed' 
-                  : 'bg-sky-800 hover:bg-blue-700 text-white'
+                  : 'bg-sky-900 hover:bg-sky-700 text-white'
               }`}
             >
               Zoom Out
@@ -523,7 +523,7 @@ export default function Home() {
         {!hasGuessed && (
           <button 
             onClick={handleGuessSubmit}
-            className="absolute bottom-6 left-1/2 -translate-x-1/2 px-8 py-3 bg-red-800 hover:bg-red-700 text-white font-bold text-lg rounded-lg shadow-lg transition-colors"
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 px-8 py-3 bg-red-900 hover:bg-red-800 text-white font-bold text-lg rounded-lg shadow-lg transition-colors"
           >
             Guess
           </button>
