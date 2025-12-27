@@ -188,24 +188,16 @@ export default function Home() {
     const image = imageRef.current;
     if (!container || !image) return;
 
-    let clientX, clientY;
-    if (e.touches?.[0]) {
-      clientX = e.touches[0].clientX;
-      clientY = e.touches[0].clientY;
-    } else if (e.changedTouches?.[0]) {
-      clientX = e.changedTouches[0].clientX;
-      clientY = e.changedTouches[0].clientY;
-    } else {
-      clientX = e.clientX;
-      clientY = e.clientY;
-    }
+    const touch = e.touches?.[0] || e.changedTouches?.[0];
+    const clientX = touch ? touch.clientX : e.clientX;
+    const clientY = touch ? touch.clientY : e.clientY;
 
     const containerRect = container.getBoundingClientRect();
     const imageRect = image.getBoundingClientRect();
-    
+
     const offsetX = imageRect.left - containerRect.left;
     const offsetY = imageRect.top - containerRect.top;
-    
+
     const clickX = clientX - containerRect.left - offsetX;
     const clickY = clientY - containerRect.top - offsetY;
 
