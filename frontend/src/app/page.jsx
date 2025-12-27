@@ -355,6 +355,22 @@ export default function Home() {
     };
   }, [zoom]);
 
+  
+useEffect(() => {
+  if (locationData && satelliteZoom > 7) {
+    const nextZoom = satelliteZoom - 1;
+    const preloadUrl = `https://jddbikgujwntbkabchjw.supabase.co/storage/v1/object/public/map-images/${locationData.storage_path}/zoom_${formatZoom(nextZoom)}.png?date=${dailyId}`;
+    const img = new Image();
+    img.src = preloadUrl;
+    
+    if (satelliteZoom === 7) {
+      const finalZoomUrl = `https://jddbikgujwntbkabchjw.supabase.co/storage/v1/object/public/map-images/${locationData.storage_path}/zoom_3.png?date=${dailyId}`;
+      const img3 = new Image();
+      img3.src = finalZoomUrl;
+    }
+  }
+}, [satelliteZoom, locationData, dailyId]);
+
   const satelliteImageUrl = locationData 
     ? `https://jddbikgujwntbkabchjw.supabase.co/storage/v1/object/public/map-images/${locationData.storage_path}/zoom_${formatZoom(satelliteZoom)}.png?date=${dailyId}`
     : '';
