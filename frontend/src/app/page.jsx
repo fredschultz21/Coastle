@@ -362,7 +362,7 @@ export default function Home() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen w-full bg-black">
-        <p className="text-white text-xl">Loading...</p>
+        <p className="text-white text-xl md:text-2xl px-4 text-center">Loading...</p>
       </div>
     );
   }
@@ -370,7 +370,7 @@ export default function Home() {
   if (!locationData) {
     return (
       <div className="flex items-center justify-center h-screen w-full bg-black">
-        <p className="text-white text-xl">Error loading location data</p>
+        <p className="text-white text-xl md:text-2xl px-4 text-center">Error loading location data</p>
       </div>
     );
   }
@@ -378,22 +378,32 @@ export default function Home() {
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+        <meta name="theme-color" content="#000000" />
         <style>{`
           html, body {
             touch-action: pan-x pan-y;
             overscroll-behavior: none;
             -ms-touch-action: pan-x pan-y;
+            -webkit-tap-highlight-color: transparent;
+          }
+          * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+          }
+          input, textarea {
+            -webkit-user-select: text;
+            user-select: text;
           }
         `}</style>
       </Head>
       
       <div className="relative h-screen w-full overflow-hidden">
-        <div className="absolute top-4 left-4 z-50">
-          <h1 className="text-3xl font-extrabold tracking-wide">
+        <div className="absolute top-4 md:top-6 left-4 md:left-6 z-50">
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
             <span className="text-white">Coastle</span>
           </h1>
-          
         </div>
         <div className="absolute inset-0">
           <img 
@@ -401,26 +411,38 @@ export default function Home() {
             alt="Satellite View"
             className="h-full w-full object-cover"
           />
+          {/* Center crosshair */}
+          <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+            <div className="relative">
+              {/* Horizontal line */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 md:w-12 h-0.5 bg-white shadow-lg"></div>
+              {/* Vertical line */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-8 md:h-12 w-0.5 bg-white shadow-lg"></div>
+              {/* Center dot */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-white rounded-full shadow-lg"></div>
+            </div>
+          </div>
         </div>
 
-        <p className="absolute bottom-4 left-4 text-xs text-white/70 z-10">
+        <p className="absolute bottom-2 md:bottom-4 left-2 md:left-4 text-[10px] md:text-xs text-white/80 z-10 drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
           © Mapbox © OpenStreetMap contributors © Maxar
         </p>
 
         {!isMinimized && (
           <div 
             className={`
-              absolute bottom-6 right-6 
+              absolute bottom-6 right-2 md:right-6 
               transition-opacity duration-300 ease-in-out
               ${isHovered ? 'opacity-100' : 'opacity-40'}
             `}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            onTouchStart={handleMouseEnter}
           >
             <div className="relative bg-black rounded-xl shadow-2xl overflow-hidden">
               <button
                 onClick={() => setIsMinimized(true)}
-                className="absolute top-2 right-2 z-10 h-8 w-8 bg-zinc-800 hover:bg-zinc-700 rounded-full flex items-center justify-center text-white text-base font-bold"
+                className="absolute top-2 right-2 z-10 h-10 w-10 md:h-8 md:w-8 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 rounded-full flex items-center justify-center text-white text-xl md:text-base font-bold shadow-lg"
               >
                 ×
               </button>
@@ -428,19 +450,19 @@ export default function Home() {
               <div className="absolute top-2 left-2 z-10 flex gap-1">
                 <button
                   onClick={handleRecenter}
-                  className="h-6 px-2 bg-zinc-800 hover:bg-zinc-700 rounded flex items-center justify-center text-white text-xs font-semibold"
+                  className="h-8 md:h-6 px-3 md:px-2 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 rounded flex items-center justify-center text-white text-sm md:text-xs font-semibold shadow-lg"
                 >
                   Recenter
                 </button>
                 <button
                   onClick={handleZoomIn}
-                  className="h-6 w-6 bg-zinc-800 hover:bg-zinc-700 rounded flex items-center justify-center text-white text-sm font-bold"
+                  className="h-8 w-8 md:h-6 md:w-6 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 rounded flex items-center justify-center text-white text-lg md:text-sm font-bold shadow-lg"
                 >
                   +
                 </button>
                 <button
                   onClick={handleZoomOut}
-                  className="h-6 w-6 bg-zinc-800 hover:bg-zinc-700 rounded flex items-center justify-center text-white text-sm font-bold"
+                  className="h-8 w-8 md:h-6 md:w-6 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 rounded flex items-center justify-center text-white text-lg md:text-sm font-bold shadow-lg"
                 >
                   −
                 </button>
@@ -450,13 +472,32 @@ export default function Home() {
                 ref={containerRef}
                 className={`
                   overflow-hidden relative
-                  ${isHovered ? 'w-[640px] h-[432px]' : 'w-[176px] h-[128px]'}
+                  ${isHovered ? 'w-[90vw] h-[60vh] md:w-[640px] md:h-[432px]' : 'w-[140px] h-[100px] md:w-[176px] md:h-[128px]'}
                   transition-all duration-300
                   cursor-crosshair
                 `}
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
+                onTouchStart={(e) => {
+                  const touch = e.touches[0];
+                  handleMouseDown({ 
+                    preventDefault: () => e.preventDefault(),
+                    clientX: touch.clientX, 
+                    clientY: touch.clientY 
+                  });
+                }}
+                onTouchMove={(e) => {
+                  if (e.touches.length === 1) {
+                    const touch = e.touches[0];
+                    handleMouseMove({ 
+                      preventDefault: () => e.preventDefault(),
+                      clientX: touch.clientX, 
+                      clientY: touch.clientY 
+                    });
+                  }
+                }}
+                onTouchEnd={handleMouseUp}
                 onWheel={handleWheel}
                 onClick={handleMapClick}
               >
@@ -485,7 +526,7 @@ export default function Home() {
                       zIndex: 20
                     }}
                   >
-                    <div className="w-3 h-3 bg-red-600 rounded-full border-2 border-white shadow-lg"></div>
+                    <div className="w-4 h-4 md:w-3 md:h-3 bg-red-600 rounded-full border-2 md:border-2 border-white shadow-lg"></div>
                   </div>
                 )}
               </div>
@@ -496,30 +537,30 @@ export default function Home() {
         {isMinimized && (
           <button
             onClick={() => setIsMinimized(false)}
-            className="absolute bottom-6 right-6 p-3 bg-zinc-900 hover:bg-zinc-800 border-[1px] border-zinc-700 rounded-xl shadow-lg transition-colors"
+            className="absolute bottom-6 right-2 md:right-6 p-4 md:p-3 bg-zinc-900 hover:bg-zinc-800 active:bg-zinc-700 border-2 md:border-[1px] border-zinc-700 rounded-xl shadow-lg transition-colors"
           >
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-8 h-8 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
             </svg>
           </button>
         )}
 
         {!hasGuessed && (
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
+          <div className="absolute bottom-20 md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 md:gap-3 px-4">
             <button 
               onClick={handleSatelliteZoomOut}
               disabled={satelliteZoom <= 7}
-              className={`px-6 py-3 font-bold text-lg rounded-lg shadow-lg transition-colors ${
+              className={`px-6 md:px-8 py-4 md:py-3 font-bold text-base md:text-lg rounded-lg shadow-lg transition-colors min-w-[120px] md:min-w-0 ${
                 satelliteZoom <= 7 
                   ? 'bg-gray-700 cursor-not-allowed' 
-                  : 'bg-sky-900 hover:bg-sky-700 text-white'
+                  : 'bg-sky-900 hover:bg-sky-700 text-white active:bg-sky-600'
               }`}
             >
               Zoom Out
             </button>
             <button 
               onClick={handleGuessSubmit}
-              className="px-8 py-3 bg-red-800 hover:bg-red-700 text-white font-bold text-lg rounded-lg shadow-lg transition-colors"
+              className="px-8 md:px-10 py-4 md:py-3 bg-red-800 hover:bg-red-700 active:bg-red-600 text-white font-bold text-base md:text-lg rounded-lg shadow-lg transition-colors min-w-[120px] md:min-w-0"
             >
               Guess
             </button>
@@ -527,30 +568,30 @@ export default function Home() {
         )}
 
         {showResults && gameResults && (
-          <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-50">
-            <div className="bg-zinc-900 rounded-2xl p-8 max-w-md w-full mx-4 border-2 border-zinc-700">
-              <h2 className="text-3xl font-bold text-white text-center mb-6">
+          <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+            <div className="bg-zinc-900 rounded-2xl p-6 md:p-8 max-w-md w-full border-2 border-zinc-700 max-h-[90vh] overflow-y-auto">
+              <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-4 md:mb-6">
                 {gameResults.isCorrect ? "Correct!" : "Not Quite!"}
               </h2>
               
-              <div className="space-y-4">
-                <div className="bg-zinc-800 rounded-lg p-4">
-                  <p className="text-zinc-400 text-sm">Distance</p>
-                  <p className="text-white text-2xl font-bold">
+              <div className="space-y-3 md:space-y-4">
+                <div className="bg-zinc-800 rounded-lg p-3 md:p-4">
+                  <p className="text-zinc-400 text-xs md:text-sm">Distance</p>
+                  <p className="text-white text-xl md:text-2xl font-bold">
                     {gameResults.distance.toFixed(2)} miles
                   </p>
                 </div>
 
-                <div className="bg-zinc-800 rounded-lg p-4">
-                  <p className="text-zinc-400 text-sm">Turn</p>
-                  <p className="text-white text-2xl font-bold">
+                <div className="bg-zinc-800 rounded-lg p-3 md:p-4">
+                  <p className="text-zinc-400 text-xs md:text-sm">Turn</p>
+                  <p className="text-white text-xl md:text-2xl font-bold">
                     Turn {gameResults.turnNumber} of 4
                   </p>
                 </div>
 
-                <div className="bg-zinc-800 rounded-lg p-4">
-                  <p className="text-zinc-400 text-sm mb-2">Score Breakdown</p>
-                  <div className="space-y-1 text-sm">
+                <div className="bg-zinc-800 rounded-lg p-3 md:p-4">
+                  <p className="text-zinc-400 text-xs md:text-sm mb-2">Score Breakdown</p>
+                  <div className="space-y-1 text-xs md:text-sm">
                     <div className="flex justify-between text-white">
                       <span>Base Points (Turn {gameResults.turnNumber}):</span>
                       <span className="font-bold">+{gameResults.score.basePoints}</span>
@@ -562,16 +603,16 @@ export default function Home() {
                       </div>
                     )}
                     <div className="border-t border-zinc-600 my-2"></div>
-                    <div className="flex justify-between text-white text-lg">
+                    <div className="flex justify-between text-white text-base md:text-lg">
                       <span className="font-bold">Final Score:</span>
                       <span className="font-bold text-green-400">{gameResults.score.finalScore}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-zinc-800 rounded-lg p-4">
-                  <p className="text-zinc-400 text-sm mb-2">Coordinates</p>
-                  <div className="space-y-1 text-xs">
+                <div className="bg-zinc-800 rounded-lg p-3 md:p-4">
+                  <p className="text-zinc-400 text-xs md:text-sm mb-2">Coordinates</p>
+                  <div className="space-y-1 text-[10px] md:text-xs">
                     <div className="flex justify-between text-white">
                       <span>Your Guess:</span>
                       <span>{gameResults.guessedLatLong.lat.toFixed(4)}°, {gameResults.guessedLatLong.lon.toFixed(4)}°</span>
@@ -584,8 +625,8 @@ export default function Home() {
                 </div>
 
                 {gameResults.isCorrect && (
-                  <div className="bg-green-900/30 border border-green-600 rounded-lg p-4 text-center">
-                    <p className="text-green-400 font-bold">
+                  <div className="bg-green-900/30 border border-green-600 rounded-lg p-3 md:p-4 text-center">
+                    <p className="text-green-400 font-bold text-sm md:text-base">
                       Within 200 miles!
                     </p>
                   </div>
@@ -594,7 +635,7 @@ export default function Home() {
 
               <button
                 onClick={() => setShowResults(false)}
-                className="w-full mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors"
+                className="w-full mt-4 md:mt-6 px-6 py-4 md:py-3 bg-blue-600 hover:bg-blue-700 active:bg-blue-500 text-white font-bold text-base md:text-lg rounded-lg transition-colors"
               >
                 Close
               </button>
