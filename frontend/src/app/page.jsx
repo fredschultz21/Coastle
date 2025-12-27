@@ -183,27 +183,15 @@ export default function Home() {
 
   const handleMapClick = (e) => {
     if (didDrag) return;
-    
-    const container = containerRef.current;
-    if (!container) return;
 
-    const rect = container.getBoundingClientRect();
-    let clickX, clickY;
-    if (e.touches && e.touches.length > 0) {
-      clickX = e.touches[0].clientX - rect.left;
-      clickY = e.touches[0].clientY - rect.top;
-    } else if (e.changedTouches && e.changedTouches.length > 0) {
-      clickX = e.changedTouches[0].clientX - rect.left;
-      clickY = e.changedTouches[0].clientY - rect.top;
-    } else {
-      clickX = e.clientX - rect.left;
-      clickY = e.clientY - rect.top;
-    }
+    const point = e.touches?.[0] ?? e.changedTouches?.[0] ?? e;
+    const coords = getImageRelativeCoords(point.clientX, point.clientY);
+    if (!coords) return;
 
-    const imageX = (clickX - position.x) / zoom;
-    const imageY = (clickY - position.y) / zoom;
-
-    setGuessMarker({ x: imageX, y: imageY });
+    setGuessMarker({
+      x: coords.imageX,
+      y: coords.imageY
+    });
   };
 
   const handleMapTouch = (e) => {
@@ -283,6 +271,28 @@ export default function Home() {
       }, 500);
     }
   };
+
+  const getImageRelativeCoords = (clientX, clientY) => {
+    const container = containerRef.current;
+    const image = imageRef.current;
+    if (!container || !image) return null;
+
+    const containerRect = container.getBoundingClientRect();
+    const imageRect = image.getBoundingClientRect();
+
+    const x = clientX - imageRect.left;
+    const y = clientY - imageRect.top;
+
+    if (x < 0 || y < 0 || x > imageRect.width || y > imageRect.height) {
+      return null;
+    }
+
+    const imageX = (x / imageRect.width) * image.naturalWidth;
+    const imageY = (y / imageRect.height) * image.naturalHeight;
+
+    return { imageX, imageY };
+  };
+
 
   const handleGuessSubmit = () => {
     if (guessMarker && locationData) {
