@@ -273,7 +273,18 @@ export default function Home() {
 
   const handleGuessSubmit = () => {
     if (guessMarker && locationData) {
-      const guessedLatLong = pixelToLatLong(guessMarker.x, guessMarker.y);
+      const image = imageRef.current;
+      const container = containerRef.current;
+      if (!image || !container) return;
+      
+      const imageRect = image.getBoundingClientRect();
+      const scaleX = image.naturalWidth / imageRect.width;
+      const scaleY = image.naturalHeight / imageRect.height;
+      
+      const scaledX = guessMarker.x * scaleX;
+      const scaledY = guessMarker.y * scaleY;
+      
+      const guessedLatLong = pixelToLatLong(scaledX, scaledY);
       setGuessLatLong(guessedLatLong);
       setHasGuessed(true);
       setSatelliteZoom(3);
@@ -289,7 +300,6 @@ export default function Home() {
       const turnNumber = 11 - satelliteZoom;
       const scoreData = calculateScore(turnNumber, distance);
 
-      
       setGameResults({
         distance: distance,
         isCorrect: isCorrect,
