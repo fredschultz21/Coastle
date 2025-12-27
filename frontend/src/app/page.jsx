@@ -494,7 +494,7 @@ useEffect(() => {
           <img 
             src={satelliteImageUrl}
             alt="Satellite View"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover portrait:object-contain"
           />
           {/* Center crosshair */}
           <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
