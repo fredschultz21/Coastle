@@ -407,22 +407,6 @@ export default function Home() {
           © Mapbox © OpenStreetMap contributors © Maxar
         </p>
 
-        {!hasGuessed && (
-          <div className="absolute top-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-            <button 
-              onClick={handleSatelliteZoomOut}
-              disabled={satelliteZoom <= 7}
-              className={`px-6 py-3 font-bold text-lg rounded-lg shadow-lg transition-colors ${
-                satelliteZoom <= 7 
-                  ? 'bg-gray-700 cursor-not-allowed' 
-                  : 'bg-sky-900 hover:bg-sky-700 text-white'
-              }`}
-            >
-              Zoom Out
-            </button>
-          </div>
-        )}
-
         {!isMinimized && (
           <div 
             className={`
@@ -521,12 +505,25 @@ export default function Home() {
         )}
 
         {!hasGuessed && (
-          <button 
-            onClick={handleGuessSubmit}
-            className="absolute bottom-6 left-1/2 -translate-x-1/2 px-8 py-3 bg-red-800 hover:bg-red-700 text-white font-bold text-lg rounded-lg shadow-lg transition-colors"
-          >
-            Guess
-          </button>
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
+            <button 
+              onClick={handleSatelliteZoomOut}
+              disabled={satelliteZoom <= 7}
+              className={`px-6 py-3 font-bold text-lg rounded-lg shadow-lg transition-colors ${
+                satelliteZoom <= 7 
+                  ? 'bg-gray-700 cursor-not-allowed' 
+                  : 'bg-sky-900 hover:bg-sky-700 text-white'
+              }`}
+            >
+              Zoom Out
+            </button>
+            <button 
+              onClick={handleGuessSubmit}
+              className="px-8 py-3 bg-red-800 hover:bg-red-700 text-white font-bold text-lg rounded-lg shadow-lg transition-colors"
+            >
+              Guess
+            </button>
+          </div>
         )}
 
         {showResults && gameResults && (
