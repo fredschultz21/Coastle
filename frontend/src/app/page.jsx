@@ -185,7 +185,8 @@ export default function Home() {
     if (didDrag) return;
     
     const container = containerRef.current;
-    if (!container) return;
+    const image = imageRef.current;
+    if (!container || !image) return;
 
     let clientX, clientY;
     if (e.touches?.[0]) {
@@ -199,9 +200,14 @@ export default function Home() {
       clientY = e.clientY;
     }
 
-    const rect = container.getBoundingClientRect();
-    const clickX = clientX - rect.left;
-    const clickY = clientY - rect.top;
+    const containerRect = container.getBoundingClientRect();
+    const imageRect = image.getBoundingClientRect();
+    
+    const offsetX = imageRect.left - containerRect.left;
+    const offsetY = imageRect.top - containerRect.top;
+    
+    const clickX = clientX - containerRect.left - offsetX;
+    const clickY = clientY - containerRect.top - offsetY;
 
     const imageX = (clickX - position.x) / zoom;
     const imageY = (clickY - position.y) / zoom;
