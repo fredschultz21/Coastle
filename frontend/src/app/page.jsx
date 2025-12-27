@@ -556,7 +556,11 @@ useEffect(() => {
                   alt="World Map"
                   style={{ 
                     imageRendering: 'pixelated',
+                    imageRendering: '-moz-crisp-edges',
+                    imageRendering: 'crisp-edges',
                     WebkitFontSmoothing: 'none',
+                    imageRendering: '-webkit-optimize-contrast',
+                    msInterpolationMode: 'nearest-neighbor',
                     transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
                     transformOrigin: '0 0',
                     willChange: 'transform'
