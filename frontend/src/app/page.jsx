@@ -158,18 +158,18 @@ export default function Home() {
     if (!container || !image) return null;
 
     const containerRect = container.getBoundingClientRect();
-    const imageRect = image.getBoundingClientRect();
-
+    
     const clickX = clientX - containerRect.left;
     const clickY = clientY - containerRect.top;
-    const imageOffsetX = imageRect.left - containerRect.left;
-    const imageOffsetY = imageRect.top - containerRect.top;
-
-    const adjustedClickX = clickX - imageOffsetX;
-    const adjustedClickY = clickY - imageOffsetY;
-
-    const imageX = (adjustedClickX - position.x) / zoom;
-    const imageY = (adjustedClickY - position.y) / zoom;
+    
+    const transformedX = (clickX - position.x) / zoom;
+    const transformedY = (clickY - position.y) / zoom;
+    
+    const scaleX = image.naturalWidth / containerRect.width;  
+    const scaleY = image.naturalHeight / containerRect.height;
+    
+    const imageX = transformedX * scaleX;
+    const imageY = transformedY * scaleY;
 
     return { imageX, imageY };
   };
