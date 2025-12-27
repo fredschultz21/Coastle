@@ -185,8 +185,7 @@ export default function Home() {
     if (didDrag) return;
     
     const container = containerRef.current;
-    const image = imageRef.current;
-    if (!container || !image) return;
+    if (!container) return;
 
     let clientX, clientY;
     if (e.touches?.[0]) {
@@ -200,38 +199,9 @@ export default function Home() {
       clientY = e.clientY;
     }
 
-    const containerRect = container.getBoundingClientRect();
-    const imageRect = image.getBoundingClientRect();
-    
-    const offsetX = imageRect.left - containerRect.left;
-    const offsetY = imageRect.top - containerRect.top;
-    
-    const clickX = clientX - containerRect.left - offsetX;
-    const clickY = clientY - containerRect.top - offsetY;
-
-    const transformedX = (clickX - position.x) / zoom;
-    const transformedY = (clickY - position.y) / zoom;
-    
-    const scaleX = image.naturalWidth / imageRect.width;
-    const scaleY = image.naturalHeight / imageRect.height;
-    
-    const imageX = transformedX * scaleX;
-    const imageY = transformedY * scaleY;
-
-    setGuessMarker({ x: imageX, y: imageY });
-  };
-
-  const handleMapTouch = (e) => {
-    if (didDrag) return;
-    if (e.touches.length !== 1) return; // Only single tap
-    
-    const container = containerRef.current;
-    if (!container) return;
-
     const rect = container.getBoundingClientRect();
-    const touch = e.touches[0];
-    const clickX = touch.clientX - rect.left;
-    const clickY = touch.clientY - rect.top;
+    const clickX = clientX - rect.left;
+    const clickY = clientY - rect.top;
 
     const imageX = (clickX - position.x) / zoom;
     const imageY = (clickY - position.y) / zoom;
@@ -569,7 +539,7 @@ useEffect(() => {
                 ref={containerRef}
                 className={`
                   overflow-hidden relative
-                  ${isHovered ? 'w-[85vw] aspect-[40/27] md:w-[640px] md:h-[432px]' : 'w-[140px] h-[100px] md:w-[176px] md:h-[128px]'}
+                  ${isHovered ? 'w-[90vw] h-[60vh] md:w-[640px] md:h-[432px]' : 'w-[140px] h-[100px] md:w-[176px] md:h-[128px]'}
                   transition-all duration-300
                   cursor-crosshair
                 `}
