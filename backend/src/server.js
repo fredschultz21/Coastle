@@ -26,6 +26,8 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/ping', (req, res) => res.status(200).json({ status: 'ok' }));
+
 app.use("/data", dataRouter);
 //app.use("/", homeRouter);
 
