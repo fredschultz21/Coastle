@@ -380,6 +380,24 @@ useEffect(() => {
   }
 }, [satelliteZoom, locationData, dailyId]);
 
+  useEffect(() => {
+      if (isHovered) {
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+      } else {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+      }
+      
+      return () => {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+      };
+    }, [isHovered]);
+
   const satelliteImageUrl = locationData 
     ? `https://jddbikgujwntbkabchjw.supabase.co/storage/v1/object/public/map-images/${locationData.storage_path}/zoom_${formatZoom(satelliteZoom)}.png?date=${dailyId}`
     : '';
@@ -391,24 +409,6 @@ useEffect(() => {
       </div>
     );
   }
-
-  useEffect(() => {
-    if (isHovered) {
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
-    } else {
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
-    }
-    
-    return () => {
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
-    };
-  }, [isHovered]);
 
   if (!locationData) {
     return (
