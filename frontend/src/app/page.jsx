@@ -262,13 +262,15 @@ export default function Home() {
   const handleGuessSubmit = () => {
     if (guessMarker && locationData) {
       const image = imageRef.current;
-      const container = containerRef.current;
-      if (!image || !container) return;
+      if (!image) return;
       
-      const containerRect = container.getBoundingClientRect();
+      const imageRect = image.getBoundingClientRect();
       
-      const scaleX = image.naturalWidth / containerRect.width;
-      const scaleY = image.naturalHeight / containerRect.height;
+      const baseWidth = imageRect.width / zoom;
+      const baseHeight = imageRect.height / zoom;
+      
+      const scaleX = image.naturalWidth / baseWidth;
+      const scaleY = image.naturalHeight / baseHeight;
       
       const scaledX = guessMarker.x * scaleX;
       const scaledY = guessMarker.y * scaleY;
