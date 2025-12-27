@@ -209,23 +209,22 @@ export default function Home() {
     const container = containerRef.current;
     if (!container) return;
 
-    const rect = container.getBoundingClientRect();
-    let clickX, clickY;
+    let clientX, clientY;
     if (e.touches && e.touches.length > 0) {
-      clickX = e.touches[0].clientX - rect.left;
-      clickY = e.touches[0].clientY - rect.top;
+      clientX = e.touches[0].clientX;
+      clientY = e.touches[0].clientY;
     } else if (e.changedTouches && e.changedTouches.length > 0) {
-      clickX = e.changedTouches[0].clientX - rect.left;
-      clickY = e.changedTouches[0].clientY - rect.top;
+      clientX = e.changedTouches[0].clientX;
+      clientY = e.changedTouches[0].clientY;
     } else {
-      clickX = e.clientX - rect.left;
-      clickY = e.clientY - rect.top;
+      clientX = e.clientX;
+      clientY = e.clientY;
     }
 
-    const imageX = (clickX - position.x) / zoom;
-    const imageY = (clickY - position.y) / zoom;
+    const coords = getImageRelativeCoords(clientX, clientY);
+    if (!coords) return;
 
-    setGuessMarker({ x: imageX, y: imageY });
+    setGuessMarker({ x: coords.imageX, y: coords.imageY });
   };
 
   const handleMapTouch = (e) => {
@@ -609,15 +608,11 @@ useEffect(() => {
                     handleMouseUp();
                     // Place marker on single tap (not drag)
                     if (!didDrag && e.changedTouches.length === 1) {
-                      const container = containerRef.current;
-                      if (!container) return;
-                      const rect = container.getBoundingClientRect();
                       const touch = e.changedTouches[0];
-                      const clickX = touch.clientX - rect.left;
-                      const clickY = touch.clientY - rect.top;
-                      const imageX = (clickX - position.x) / zoom;
-                      const imageY = (clickY - position.y) / zoom;
-                      setGuessMarker({ x: imageX, y: imageY });
+                      const coords = getImageRelativeCoords(touch.clientX, touch.clientY);
+                      if (coords) {
+                        setGuessMarker({ x: coords.imageX, y: coords.imageY });
+                      }
                     }
                   }
                 }}
