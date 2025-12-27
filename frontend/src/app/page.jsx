@@ -458,7 +458,7 @@ export default function Home() {
                   onClick={handleRecenter}
                   className="h-8 md:h-6 px-3 md:px-2 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 rounded flex items-center justify-center text-white text-sm md:text-xs font-semibold shadow-lg"
                 >
-                  Recenter
+                  recenter
                 </button>
                 <button
                   onClick={handleZoomIn}
@@ -556,7 +556,7 @@ export default function Home() {
             <button 
               onClick={handleSatelliteZoomOut}
               disabled={satelliteZoom <= 7}
-              className={`w-[140px] md:w-[150px] py-4 md:py-3 font-bold text-base md:text-lg rounded-lg shadow-lg transition-colors ${
+              className={`w-[140px] md:w-[150px] py-4 md:py-3 font-extrabold text-base md:text-lg rounded-lg shadow-lg transition-colors ${
                 satelliteZoom <= 7 
                   ? 'bg-gray-700 cursor-not-allowed' 
                   : 'bg-sky-900 hover:bg-sky-700 text-white active:bg-sky-600'
@@ -566,7 +566,7 @@ export default function Home() {
             </button>
             <button 
               onClick={handleGuessSubmit}
-              className="w-[140px] md:w-[150px] py-4 md:py-3 bg-red-800 hover:bg-red-700 active:bg-red-600 text-white font-bold text-base md:text-lg rounded-lg shadow-lg transition-colors"
+              className="w-[140px] md:w-[150px] py-4 md:py-3 bg-red-800 hover:bg-red-700 active:bg-red-600 text-white font-extrabold text-base md:text-lg rounded-lg shadow-lg transition-colors"
             >
               guess
             </button>
