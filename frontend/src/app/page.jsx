@@ -313,7 +313,7 @@ export default function Home() {
       const turnNumber = 11 - satelliteZoom;
       const scoreData = calculateScore(turnNumber, distance);
 
-      setGameResults({
+      const resultsToSave = {
         distance: distance,
         isCorrect: isCorrect,
         turnNumber: turnNumber,
@@ -323,14 +323,15 @@ export default function Home() {
           lat: locationData.latitude,
           lon: locationData.longitude
         }
-      });
-      
+      };
+
+      setGameResults(resultsToSave);
       setShowResults(true);
 
       const dailyId = new Date().toISOString().split('T')[0];
       localStorage.setItem(`coastle-${dailyId}`, JSON.stringify({
         completed: true,
-        results: gameResults
+        results: resultsToSave
       }));
       
     } else {
@@ -692,9 +693,33 @@ useEffect(() => {
           </div>
         )}
 
+        {hasGuessed && !showResults && (
+          <div className="absolute bottom-20 portrait:top-20 portrait:bottom-auto md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 md:gap-3 px-4 z-50">
+            <button 
+              onClick={() => setShowResults(true)}
+              className="w-[140px] md:w-[150px] py-4 md:py-3 bg-sky-900 hover:bg-sky-800 active:bg-sky-700 text-white font-extrabold text-base md:text-lg rounded-lg shadow-lg transition-colors"
+            >
+              view results
+            </button>
+          </div>
+        )}
+
         {showResults && gameResults && (
-          <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-            <div className="bg-zinc-900 rounded-2xl p-6 md:p-8 max-w-md w-full border-2 border-zinc-700 max-h-[90vh] overflow-y-auto">
+          <div 
+            className="absolute inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+            onClick={() => setShowResults(false)}
+          >
+            <div 
+              className="bg-zinc-900 rounded-2xl p-6 md:p-8 max-w-md w-full border-2 border-zinc-700 max-h-[90vh] overflow-y-auto relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setShowResults(false)}
+                className="absolute top-2 right-2 h-8 w-8 md:h-8 md:w-8 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg z-10"
+              >
+                ×
+              </button>
+
               <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-4 md:mb-6">
                 {gameResults.isCorrect ? "Correct!" : "Not Quite!"}
               </h2>
