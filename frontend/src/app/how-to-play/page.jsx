@@ -95,14 +95,14 @@ export default function HowToPlay() {
 
               <div className="space-y-6">
                 <div>
-                  <h3 className="font-bold text-lg mb-3 text-green-600">
+                  <h3 className="font-bold text-lg mb-3 text-green-500">
                     Add Base Points
                   </h3>
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {[4000, 3000, 2000, 1000].map((pts, i) => (
                       <div key={pts} className="bg-zinc-800 rounded-lg p-3 text-center">
-                        <div className="text-2xl font-bold text-green-600">
+                        <div className="text-2xl font-bold text-green-500">
                           {pts}
                         </div>
                         <div className="text-xs text-zinc-400">
@@ -114,7 +114,7 @@ export default function HowToPlay() {
                 </div>
 
                 <div>
-                  <h3 className="font-bold text-lg mb-3 text-red-300">
+                  <h3 className="font-bold text-lg mb-3 text-red-500">
                     Subtract Distance Penalty
                   </h3>
 
@@ -138,7 +138,7 @@ export default function HowToPlay() {
                       </div>
                       <div className="flex justify-between">
                         <span>More than 600 miles</span>
-                        <span className="text-red-600">-3000 points or more</span>
+                        <span className="text-red-500">-3000 points or more</span>
                       </div>
                     </div>
                   </div>
@@ -152,11 +152,11 @@ export default function HowToPlay() {
                   <div className="space-y-1 text-sm">
                     <div className="flex justify-between text-zinc-300">
                       <span>Second turn guess</span>
-                      <span className="text-green-300">+3000</span>
+                      <span className="text-green-600">+3000</span>
                     </div>
                     <div className="flex justify-between text-zinc-300">
                       <span>450 miles away</span>
-                      <span className="text-red-300">-2000</span>
+                      <span className="text-red-500">-2000</span>
                     </div>
                     <div className="border-t border-zinc-700 my-2"></div>
                     <div className="flex justify-between font-bold text-lg">
