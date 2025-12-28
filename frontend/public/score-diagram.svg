@@ -1,0 +1,93 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="oceanGradient" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#1e3a5f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a1929;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="#0a0a0a"/>
+  
+  <!-- Scoring rings (from outside to inside) -->
+  <!-- 600+ miles - Red zone -->
+  <circle cx="400" cy="300" r="280" fill="none" stroke="#dc2626" stroke-width="3" stroke-dasharray="8,4" opacity="0.4"/>
+  <text x="400" y="50" text-anchor="middle" fill="#dc2626" font-size="18" font-weight="bold" font-family="Arial, sans-serif">
+    600+ miles: -3000+ pts
+  </text>
+  
+  <!-- 400-600 miles - Orange zone -->
+  <circle cx="400" cy="300" r="210" fill="none" stroke="#f97316" stroke-width="3" stroke-dasharray="8,4" opacity="0.5"/>
+  <text x="400" y="115" text-anchor="middle" fill="#f97316" font-size="18" font-weight="bold" font-family="Arial, sans-serif">
+    400-600 miles: -2000 pts
+  </text>
+  
+  <!-- 200-400 miles - Yellow zone -->
+  <circle cx="400" cy="300" r="140" fill="none" stroke="#fbbf24" stroke-width="3" stroke-dasharray="8,4" opacity="0.6"/>
+  <text x="400" y="180" text-anchor="middle" fill="#fbbf24" font-size="18" font-weight="bold" font-family="Arial, sans-serif">
+    200-400 miles: -1000 pts
+  </text>
+  
+  <!-- 0-200 miles - Green zone (safe) -->
+  <circle cx="400" cy="300" r="70" fill="none" stroke="#22c55e" stroke-width="4" stroke-dasharray="8,4" opacity="0.8"/>
+  <text x="400" y="250" text-anchor="middle" fill="#22c55e" font-size="20" font-weight="bold" font-family="Arial, sans-serif">
+    0-200 miles: ✓ CORRECT
+  </text>
+  
+  <!-- Ocean base inside green zone -->
+  <circle cx="400" cy="300" r="65" fill="url(#oceanGradient)"/>
+  
+  <!-- Cartoon coastline (irregular shape) -->
+  <path d="
+    M 380 290
+    Q 385 285, 390 288
+    Q 395 290, 398 285
+    Q 402 280, 408 283
+    Q 415 287, 420 285
+    Q 425 283, 428 287
+    Q 430 292, 425 295
+    Q 420 298, 418 303
+    Q 416 308, 412 310
+    Q 408 312, 403 310
+    Q 398 308, 395 312
+    Q 390 316, 385 313
+    Q 380 310, 378 305
+    Q 376 300, 380 295
+    Z
+  " fill="#4ade80" stroke="#16a34a" stroke-width="2"/>
+  
+  <!-- Small islands/rocks -->
+  <ellipse cx="360" cy="295" rx="8" ry="6" fill="#4ade80" stroke="#16a34a" stroke-width="1"/>
+  <ellipse cx="440" cy="305" rx="6" ry="5" fill="#4ade80" stroke="#16a34a" stroke-width="1"/>
+  
+  <!-- Palm trees on main land -->
+  <g transform="translate(395, 295)">
+    <rect x="-1" y="0" width="2" height="12" fill="#78350f"/>
+    <ellipse cx="0" cy="-2" rx="4" ry="4" fill="#22c55e"/>
+  </g>
+  <g transform="translate(410, 298)">
+    <rect x="-1" y="0" width="2" height="10" fill="#78350f"/>
+    <ellipse cx="0" cy="-1" rx="3" ry="3" fill="#22c55e"/>
+  </g>
+  
+  <!-- Target pin at exact location -->
+  <g transform="translate(400, 300)">
+    <circle cx="0" cy="0" r="5" fill="#ef4444" stroke="#fff" stroke-width="2"/>
+    <circle cx="0" cy="0" r="2" fill="#fff"/>
+  </g>
+  
+  <!-- Distance scale indicator -->
+  <g transform="translate(50, 550)">
+    <line x1="0" y1="0" x2="100" y2="0" stroke="#ffffff" stroke-width="2"/>
+    <line x1="0" y1="-5" x2="0" y2="5" stroke="#ffffff" stroke-width="2"/>
+    <line x1="100" y1="-5" x2="100" y2="5" stroke="#ffffff" stroke-width="2"/>
+    <text x="50" y="20" text-anchor="middle" fill="#ffffff" font-size="14" font-family="Arial, sans-serif">
+      200 miles
+    </text>
+  </g>
+  
+  <!-- Title -->
+  <text x="400" y="580" text-anchor="middle" fill="#94a3b8" font-size="16" font-family="Arial, sans-serif" font-style="italic">
+    Scoring decreases by 1000 points per 200-mile ring
+  </text>
+</svg>
