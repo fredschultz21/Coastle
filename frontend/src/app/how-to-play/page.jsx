@@ -126,7 +126,7 @@ export default function HowToPlay() {
                     <div className="space-y-2 text-sm text-zinc-400">
                       <div className="flex justify-between">
                         <span>Within 200 miles</span>
-                        <span className="text-green-300 font-bold">No penalty</span>
+                        <span className="text-green-500 font-bold">No penalty</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Within 400 miles</span>
