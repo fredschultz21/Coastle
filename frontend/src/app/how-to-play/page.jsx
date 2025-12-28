@@ -21,8 +21,7 @@ export default function HowToPlay() {
           </div>
 
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
-            <span className="text-white">How to Play </span>
-            <span className="text-sky-300">Coastle</span>
+            <span className="text-white">How to Play Coastle</span>
           </h1>
 
           <p className="text-zinc-400 text-lg md:text-xl mb-12">
@@ -31,7 +30,7 @@ export default function HowToPlay() {
 
           <div className="space-y-8">
             <section className="bg-zinc-900 rounded-xl p-6 md:p-8 border border-zinc-800">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-sky-300">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">
                 Objective
               </h2>
               <p className="text-zinc-300 text-base md:text-lg leading-relaxed">
@@ -42,7 +41,7 @@ export default function HowToPlay() {
             </section>
 
             <section className="bg-zinc-900 rounded-xl p-6 md:p-8 border border-zinc-800">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-sky-300">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">
                 How to Play
               </h2>
 
@@ -90,20 +89,20 @@ export default function HowToPlay() {
             </section>
 
             <section className="bg-zinc-900 rounded-xl p-6 md:p-8 border border-zinc-800">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-sky-300">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">
                 Scoring
               </h2>
 
               <div className="space-y-6">
                 <div>
-                  <h3 className="font-bold text-lg mb-3 text-green-300">
+                  <h3 className="font-bold text-lg mb-3 text-green-600">
                     Add Base Points
                   </h3>
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {[4000, 3000, 2000, 1000].map((pts, i) => (
                       <div key={pts} className="bg-zinc-800 rounded-lg p-3 text-center">
-                        <div className="text-2xl font-bold text-green-300">
+                        <div className="text-2xl font-bold text-green-600">
                           {pts}
                         </div>
                         <div className="text-xs text-zinc-400">
@@ -135,11 +134,11 @@ export default function HowToPlay() {
                       </div>
                       <div className="flex justify-between">
                         <span>Within 600 miles</span>
-                        <span className="text-orange-300">-2000 points</span>
+                        <span className="text-orange-500">-2000 points</span>
                       </div>
                       <div className="flex justify-between">
                         <span>More than 600 miles</span>
-                        <span className="text-red-300">-3000 points or more</span>
+                        <span className="text-red-600">-3000 points or more</span>
                       </div>
                     </div>
                   </div>
