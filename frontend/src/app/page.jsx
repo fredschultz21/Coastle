@@ -111,7 +111,18 @@ export default function Home() {
 
   const handleSatelliteZoomOut = () => {
     if (satelliteZoom > 7) {
-      setSatelliteZoom(prev => Math.max(7, prev - 1));
+      const newZoom = Math.max(7, satelliteZoom - 1);
+      setSatelliteZoom(newZoom);
+      
+      const turnNumber = 11 - newZoom;
+      if (turnNumber >= 2) {
+        const dailyId = new Date().toISOString().split('T')[0];
+        localStorage.setItem(`coastle-${dailyId}`, JSON.stringify({
+          turn: turnNumber,
+          zoom: newZoom,
+          completed: false
+        }));
+      }
     }
   };
 
@@ -285,15 +296,6 @@ export default function Home() {
       
       const naturalX = guessMarker.x * scaleX;
       const naturalY = guessMarker.y * scaleY;
-
-      /*
-      alert(`Debug Info:
-        Natural coords: ${naturalX.toFixed(2)}, ${naturalY.toFixed(2)}
-        Image dimensions: ${image.naturalWidth} × ${image.naturalHeight}
-        Rendered size: ${currentWidth.toFixed(2)} × ${currentHeight.toFixed(2)}
-        Scale factors: ${scaleX.toFixed(4)} × ${scaleY.toFixed(4)}
-        Marker in container: ${guessMarker.x.toFixed(2)}, ${guessMarker.y.toFixed(2)}`);
-      */
       
       const guessedLatLong = pixelToLatLong(naturalX, naturalY, image.naturalWidth, image.naturalHeight);
       setGuessLatLong(guessedLatLong);
@@ -324,6 +326,12 @@ export default function Home() {
       });
       
       setShowResults(true);
+
+      const dailyId = new Date().toISOString().split('T')[0];
+      localStorage.setItem(`coastle-${dailyId}`, JSON.stringify({
+        completed: true,
+        results: gameResults
+      }));
       
     } else {
       alert("Please place a marker on the map first!");
@@ -428,6 +436,25 @@ useEffect(() => {
         document.body.style.width = '';
       };
     }, [isHovered]);
+
+  useEffect(() => {
+    if (!locationData) return;
+    
+    const dailyId = new Date().toISOString().split('T')[0];
+    const savedGame = localStorage.getItem(`coastle-${dailyId}`);
+    
+    if (savedGame) {
+      const data = JSON.parse(savedGame);
+      if (data.completed) {
+        setShowResults(true);
+        setGameResults(data.results);
+        setHasGuessed(true);
+        setSatelliteZoom(3);
+      } else if (data.zoom) {
+        setSatelliteZoom(data.zoom);
+      }
+    }
+  }, [locationData]);
 
   const satelliteImageUrl = locationData 
     ? `https://jddbikgujwntbkabchjw.supabase.co/storage/v1/object/public/map-images/${locationData.storage_path}/zoom_${formatZoom(satelliteZoom)}.png?date=${dailyId}`
