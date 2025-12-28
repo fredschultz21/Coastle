@@ -15,14 +15,14 @@ export default function HowToPlay() {
       <div className="min-h-screen bg-black text-white">
         <div className="max-w-3xl mx-auto px-4 py-8 md:py-12">
           <div className="mb-8">
-            <Link href="/" className="text-sky-400 hover:text-sky-300 text-sm md:text-base">
+            <Link href="/" className="text-sky-300 hover:text-sky-200 text-sm md:text-base">
               ← Back to Game
             </Link>
           </div>
 
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
             <span className="text-white">How to Play </span>
-            <span className="text-sky-400">Coastle</span>
+            <span className="text-sky-300">Coastle</span>
           </h1>
 
           <p className="text-zinc-400 text-lg md:text-xl mb-12">
@@ -30,8 +30,8 @@ export default function HowToPlay() {
           </p>
 
           <div className="space-y-8">
-            <section className="bg-zinc-900 rounded-xl p-6 md:p-8 border-2 border-zinc-800">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-sky-400">
+            <section className="bg-zinc-900 rounded-xl p-6 md:p-8 border border-zinc-800">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-sky-300">
                 Objective
               </h2>
               <p className="text-zinc-300 text-base md:text-lg leading-relaxed">
@@ -41,72 +41,40 @@ export default function HowToPlay() {
               </p>
             </section>
 
-            <section className="bg-zinc-900 rounded-xl p-6 md:p-8 border-2 border-zinc-800">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-sky-400">
+            <section className="bg-zinc-900 rounded-xl p-6 md:p-8 border border-zinc-800">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-sky-300">
                 How to Play
               </h2>
 
               <div className="space-y-4">
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-sky-900 rounded-full flex items-center justify-center font-bold">
-                    1
+                {[1, 2, 3, 4].map((n) => (
+                  <div key={n} className="flex gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 bg-sky-800 rounded-full flex items-center justify-center font-bold">
+                      {n}
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg mb-1">
+                        {[
+                          "Look at the image",
+                          "Zoom out when needed",
+                          "Open the world map",
+                          "Place your guess",
+                        ][n - 1]}
+                      </h3>
+                      <p className="text-zinc-400">
+                        {[
+                          "Study the coastline, land, water, buildings, and terrain.",
+                          "You can zoom out a limited number of times to see more of the area. Using fewer zooms gives more points.",
+                          "Open the small world map to see the full globe.",
+                          "Click on the map to drop a pin where you think the location is. You can move and zoom the map for accuracy.",
+                        ][n - 1]}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-bold text-lg mb-1">
-                      Look at the image
-                    </h3>
-                    <p className="text-zinc-400">
-                      Study the coastline, land, water, buildings, and terrain.
-                    </p>
-                  </div>
-                </div>
+                ))}
 
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-sky-900 rounded-full flex items-center justify-center font-bold">
-                    2
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg mb-1">
-                      Zoom out when needed
-                    </h3>
-                    <p className="text-zinc-400">
-                      You can zoom out a limited number of times to see more of the area.
-                      Using fewer zooms gives more points.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-sky-900 rounded-full flex items-center justify-center font-bold">
-                    3
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg mb-1">
-                      Open the world map
-                    </h3>
-                    <p className="text-zinc-400">
-                      Open the small world map to see the full globe.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-sky-900 rounded-full flex items-center justify-center font-bold">
-                    4
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg mb-1">
-                      Place your guess
-                    </h3>
-                    <p className="text-zinc-400">
-                      Click on the map to drop a pin where you think the location is.
-                      You can move and zoom the map for accuracy.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-red-800 rounded-full flex items-center justify-center font-bold">
+                  <div className="flex-shrink-0 w-8 h-8 bg-red-900 rounded-full flex items-center justify-center font-bold">
                     5
                   </div>
                   <div>
@@ -121,59 +89,34 @@ export default function HowToPlay() {
               </div>
             </section>
 
-            <section className="bg-zinc-900 rounded-xl p-6 md:p-8 border-2 border-zinc-800">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-sky-400">
+            <section className="bg-zinc-900 rounded-xl p-6 md:p-8 border border-zinc-800">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-sky-300">
                 Scoring
               </h2>
 
               <div className="space-y-6">
                 <div>
-                  <h3 className="font-bold text-lg mb-3 text-green-400">
-                    Base Points
+                  <h3 className="font-bold text-lg mb-3 text-green-300">
+                    Add Base Points
                   </h3>
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    <div className="bg-zinc-800 rounded-lg p-3 text-center">
-                      <div className="text-2xl font-bold text-green-400">
-                        4000
+                    {[4000, 3000, 2000, 1000].map((pts, i) => (
+                      <div key={pts} className="bg-zinc-800 rounded-lg p-3 text-center">
+                        <div className="text-2xl font-bold text-green-300">
+                          {pts}
+                        </div>
+                        <div className="text-xs text-zinc-400">
+                          {["First", "Second", "Third", "Fourth"][i]} turn
+                        </div>
                       </div>
-                      <div className="text-xs text-zinc-400">
-                        First turn
-                      </div>
-                    </div>
-
-                    <div className="bg-zinc-800 rounded-lg p-3 text-center">
-                      <div className="text-2xl font-bold text-green-400">
-                        3000
-                      </div>
-                      <div className="text-xs text-zinc-400">
-                        Second turn
-                      </div>
-                    </div>
-
-                    <div className="bg-zinc-800 rounded-lg p-3 text-center">
-                      <div className="text-2xl font-bold text-green-400">
-                        2000
-                      </div>
-                      <div className="text-xs text-zinc-400">
-                        Third turn
-                      </div>
-                    </div>
-
-                    <div className="bg-zinc-800 rounded-lg p-3 text-center">
-                      <div className="text-2xl font-bold text-green-400">
-                        1000
-                      </div>
-                      <div className="text-xs text-zinc-400">
-                        Fourth turn
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="font-bold text-lg mb-3 text-red-400">
-                    Distance Penalty
+                  <h3 className="font-bold text-lg mb-3 text-red-300">
+                    Subtract Distance Penalty
                   </h3>
 
                   <div className="bg-zinc-800 rounded-lg p-4">
@@ -184,30 +127,19 @@ export default function HowToPlay() {
                     <div className="space-y-2 text-sm text-zinc-400">
                       <div className="flex justify-between">
                         <span>Within 200 miles</span>
-                        <span className="text-green-400 font-bold">
-                          No penalty
-                        </span>
+                        <span className="text-green-300 font-bold">No penalty</span>
                       </div>
-
                       <div className="flex justify-between">
-                        <span>200 to 400 miles</span>
-                        <span className="text-yellow-400">
-                          -1000 points
-                        </span>
+                        <span>Within 400 miles</span>
+                        <span className="text-yellow-300">-1000 points</span>
                       </div>
-
                       <div className="flex justify-between">
-                        <span>400 to 600 miles</span>
-                        <span className="text-orange-400">
-                          -2000 points
-                        </span>
+                        <span>Within 600 miles</span>
+                        <span className="text-orange-300">-2000 points</span>
                       </div>
-
                       <div className="flex justify-between">
                         <span>More than 600 miles</span>
-                        <span className="text-red-400">
-                          -3000 points or more
-                        </span>
+                        <span className="text-red-300">-3000 points or more</span>
                       </div>
                     </div>
                   </div>
@@ -220,26 +152,17 @@ export default function HowToPlay() {
 
                   <div className="space-y-1 text-sm">
                     <div className="flex justify-between text-zinc-300">
-                      <span>Third turn guess</span>
-                      <span className="text-green-400">
-                        +2000
-                      </span>
+                      <span>Second turn guess</span>
+                      <span className="text-green-300">+3000</span>
                     </div>
-
                     <div className="flex justify-between text-zinc-300">
                       <span>450 miles away</span>
-                      <span className="text-red-400">
-                        -2000
-                      </span>
+                      <span className="text-red-300">-2000</span>
                     </div>
-
                     <div className="border-t border-zinc-700 my-2"></div>
-
                     <div className="flex justify-between font-bold text-lg">
                       <span>Final score</span>
-                      <span className="text-white">
-                        0
-                      </span>
+                      <span className="text-white">1000</span>
                     </div>
                   </div>
                 </div>
@@ -250,7 +173,7 @@ export default function HowToPlay() {
           <div className="mt-12 text-center">
             <Link
               href="/"
-              className="inline-block px-8 py-4 bg-sky-900 hover:bg-sky-800 text-white font-bold text-lg rounded-lg transition-colors"
+              className="inline-block px-8 py-4 bg-sky-800 hover:bg-sky-700 text-white font-bold text-lg rounded-lg transition-colors"
             >
               Start Playing →
             </Link>
