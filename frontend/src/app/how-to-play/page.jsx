@@ -64,7 +64,7 @@ export default function HowToPlay() {
                         {[
                           "Study the coastline, land, water, buildings, and terrain.",
                           "You can zoom out a limited number of times to see more of the area. Using fewer zooms gives more points.",
-                          "Open the small world map to see the full globe.",
+                          "Open the small pixelated world map to see the full globe.",
                           "Click on the map to drop a pin where you think the location is. You can move and zoom the map for accuracy.",
                         ][n - 1]}
                       </p>
@@ -146,7 +146,7 @@ export default function HowToPlay() {
 
                 <div className="bg-zinc-800 rounded-lg p-4">
                   <h3 className="font-bold mb-2">
-                    Example
+                    Example:
                   </h3>
 
                   <div className="space-y-1 text-sm">

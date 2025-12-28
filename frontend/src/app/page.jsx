@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Head from "next/head";
+import Link from "next/link";
 
 export default function Home() {
   const [isMinimized, setIsMinimized] = useState(false);
@@ -484,11 +485,17 @@ useEffect(() => {
             <span className="text-white">coastle</span>
           </h1>
         </div>
-        <div className="absolute top-4 md:top-6 right-4 md:right-6 z-50">
+        <div className="absolute top-4 md:top-6 right-4 md:right-6 z-50 flex items-start gap-3">
           <p className="text-sm md:text-base font-semibold tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] text-white text-right">
             daily game for<br />
             {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
           </p>
+          <Link 
+            href="/how-to-play"
+            className="px-3 py-2 md:px-4 md:py-2 bg-sky-900 hover:bg-sky-800 active:bg-sky-700 text-white font-bold text-xs md:text-sm rounded-lg shadow-lg transition-colors whitespace-nowrap"
+          >
+            How to Play
+          </Link>
         </div>
         <div className="absolute inset-0 bg-zinc-900">
           <img 
