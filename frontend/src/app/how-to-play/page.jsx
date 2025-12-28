@@ -15,7 +15,7 @@ export default function HowToPlay() {
       <div className="min-h-screen bg-black text-white">
         <div className="max-w-3xl mx-auto px-4 py-8 md:py-12">
           <div className="mb-8">
-            <Link href="/" className="text-sky-300 hover:text-sky-200 text-sm md:text-base">
+            <Link href="/" className="text-sky-500 hover:text-sky-400 text-sm md:text-base">
               ← Back to Game
             </Link>
           </div>
@@ -73,7 +73,7 @@ export default function HowToPlay() {
                 ))}
 
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-red-900 rounded-full flex items-center justify-center font-bold">
+                  <div className="flex-shrink-0 w-8 h-8 bg-sky-800 rounded-full flex items-center justify-center font-bold">
                     5
                   </div>
                   <div>
