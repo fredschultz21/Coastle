@@ -1,7 +1,5 @@
 # Coastle
 
-![CI](https://github.com/fredschultz21/Coastle/actions/workflows/ci.yml/badge.svg)
-
 A daily geography puzzle game where players identify coastal locations from satellite imagery. Guess the location, earn points, and share your score!
 
 ## How to Play
