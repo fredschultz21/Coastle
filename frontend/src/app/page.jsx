@@ -372,7 +372,7 @@ export default function Home() {
     });
 
     const distanceText = gameResults.isCorrect 
-      ? "right on target" 
+      ? "On target" 
       : `${Math.round(gameResults.distance)} miles off target`;
 
     const shareText = `Coastle - ${today}
@@ -381,7 +381,7 @@ export default function Home() {
     Turn ${gameResults.turnNumber}
     ${distanceText}
 
-    try to beat me:
+    Try to beat me:
     coastle-game.vercel.app`;
 
     try {
