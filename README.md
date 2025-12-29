@@ -1,4 +1,4 @@
-# 🌊 Coastle
+# Coastle
 
 A daily geography puzzle game where players identify coastal locations from satellite imagery. Guess the location, earn points, and share your score!
 
