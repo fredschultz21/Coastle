@@ -23,6 +23,7 @@ export default function Home() {
   const [gameResults, setGameResults] = useState(null);
   const [lastPinchDistance, setLastPinchDistance] = useState(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [shareButtonText, setShareButtonText] = useState("Share Score");
   const containerRef = useRef(null);
   const imageRef = useRef(null);
   const pinTimeoutRef = useRef(null);
@@ -336,6 +337,60 @@ export default function Home() {
       
     } else {
       alert("Please place a marker on the map first!");
+    }
+  };
+
+  const handleShare = async () => {
+    const getDistanceColor = (distance) => {
+      if (distance <= 200) return '🟩';
+      if (distance <= 400) return '🟨';
+      if (distance <= 600) return '🟧';
+      return '🟥';
+    };
+
+    const getEmojiBoxes = () => {
+      const boxes = [];
+      const turnNumber = gameResults.turnNumber;
+      
+      for (let i = 1; i <= 4; i++) {
+        if (i < turnNumber) {
+          boxes.push('🟦');
+        } else if (i === turnNumber) {
+          boxes.push(getDistanceColor(gameResults.distance));
+        } else {
+          boxes.push('⬜');
+        }
+      }
+      
+      return boxes.join('');
+    };
+
+    const today = new Date().toLocaleDateString('en-US', { 
+      month: 'short', 
+      day: 'numeric', 
+      year: 'numeric' 
+    });
+
+    const distanceText = gameResults.isCorrect 
+      ? "right on target" 
+      : `${Math.round(gameResults.distance)} miles off target`;
+
+    const shareText = `Coastle - ${today}
+    ${getEmojiBoxes()}
+    ${gameResults.score.finalScore} points
+    Turn ${gameResults.turnNumber}
+    ${distanceText}
+
+    try to beat me:
+    coastle-game.vercel.app`;
+
+    try {
+      await navigator.clipboard.writeText(shareText);
+      setShareButtonText("Copied!");
+      setTimeout(() => setShareButtonText("Share Score"), 2000);
+    } catch (err) {
+      setShareButtonText("Failed!");
+      setTimeout(() => setShareButtonText("Share Score"), 2000);
     }
   };
 
@@ -784,8 +839,15 @@ useEffect(() => {
               </div>
 
               <button
+                onClick={handleShare}
+                className="w-full mt-4 md:mt-6 px-6 py-4 md:py-3 bg-green-600 hover:bg-green-700 active:bg-green-500 text-white font-bold text-base md:text-lg rounded-lg transition-colors"
+              >
+                {shareButtonText}
+              </button>
+
+              <button
                 onClick={() => setShowResults(false)}
-                className="w-full mt-4 md:mt-6 px-6 py-4 md:py-3 bg-blue-600 hover:bg-blue-700 active:bg-blue-500 text-white font-bold text-base md:text-lg rounded-lg transition-colors"
+                className="w-full mt-3 md:mt-3 px-6 py-4 md:py-3 bg-blue-600 hover:bg-blue-700 active:bg-blue-500 text-white font-bold text-base md:text-lg rounded-lg transition-colors"
               >
                 Close
               </button>
