@@ -39,6 +39,26 @@ export default function Home() {
   const dailyId = new Date().toISOString().split('T')[0];
 
   useEffect(() => {
+    const clearOldDailyGames = () => {
+      const today = new Date().toISOString().split('T')[0];
+      
+      for (let i = localStorage.length - 1; i >= 0; i--) {
+        const key = localStorage.key(i);
+        
+        if (key && key.startsWith('coastle-')) {
+          const gameDate = key.replace('coastle-', '');
+          
+          if (gameDate !== today) {
+            localStorage.removeItem(key);
+          }
+        }
+      }
+    };
+
+    clearOldDailyGames();
+  }, []);
+
+  useEffect(() => {
     const fetchLocationData = async () => {
       try {
         const backendUrl = window.location.hostname === 'localhost' 
