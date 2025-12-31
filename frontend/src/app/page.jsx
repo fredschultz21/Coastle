@@ -584,7 +584,7 @@ useEffect(() => {
       
       <div className="relative h-screen w-full overflow-hidden">
         <div className="absolute top-4 md:top-6 left-4 md:left-6 z-50">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
             <span className="text-white">coastle</span>
           </h1>
         </div>
