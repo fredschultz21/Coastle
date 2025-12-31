@@ -588,16 +588,15 @@ useEffect(() => {
             <span className="text-white">coastle</span>
           </h1>
         </div>
-        <div className="absolute top-4 md:top-6 right-4 md:right-6 z-50 flex items-center gap-3">
-          <p className="text-sm md:text-base font-semibold tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] text-white text-right">
-            daily game for<br />
+        <div className="absolute top-4 md:top-6 right-4 md:right-6 z-50 flex items-center gap-3 md:gap-4">
+          <p className="text-xs md:text-sm font-medium tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] text-zinc-300 text-right">
             {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
           </p>
           <Link 
             href="/how-to-play"
-            className="px-4 py-3 md:px-5 md:py-3 bg-sky-900 hover:bg-sky-800 active:bg-sky-700 text-white font-bold text-sm md:text-base rounded-lg shadow-lg transition-colors whitespace-nowrap"
+            className="px-5 py-3 md:px-6 md:py-3 bg-white hover:bg-zinc-200 active:bg-zinc-300 text-black font-bold text-xs md:text-sm tracking-wider rounded-lg shadow-lg transition-colors whitespace-nowrap"
           >
-            How to Play
+            HOW TO PLAY
           </Link>
         </div>
         <div className="absolute inset-0 bg-zinc-900">
@@ -738,32 +737,32 @@ useEffect(() => {
         {isMinimized && (
           <button
             onClick={() => setIsMinimized(false)}
-            className="absolute bottom-6 right-2 md:right-6 p-4 md:p-3 bg-zinc-900 hover:bg-zinc-800 active:bg-zinc-700 border-2 md:border-[1px] border-zinc-700 rounded-xl shadow-lg transition-colors"
+            className="absolute bottom-6 right-2 md:right-6 p-4 md:p-3 bg-white hover:bg-zinc-200 active:bg-zinc-300 border border-zinc-300 rounded-lg shadow-lg transition-colors"
           >
-            <svg className="w-8 h-8 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 md:w-5 md:h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
             </svg>
           </button>
         )}
 
         {!hasGuessed && (
-          <div className="absolute bottom-20 portrait:top-20 portrait:bottom-auto md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 md:gap-3 px-4 z-50">
+          <div className="absolute bottom-20 portrait:top-20 portrait:bottom-auto md:bottom-6 left-1/2 -translate-x-1/2 flex gap-3 md:gap-4 px-4 z-50">
             <button 
               onClick={handleSatelliteZoomOut}
               disabled={satelliteZoom <= 7}
-              className={`w-[140px] md:w-[150px] py-4 md:py-3 font-extrabold text-base md:text-lg rounded-lg shadow-lg transition-colors ${
+              className={`w-[140px] md:w-[160px] py-4 md:py-4 font-bold text-xs md:text-sm tracking-wider rounded-lg shadow-lg transition-colors ${
                 satelliteZoom <= 7 
-                  ? 'bg-gray-700 cursor-not-allowed' 
-                  : 'bg-sky-900 hover:bg-sky-700 text-white active:bg-sky-600'
+                  ? 'bg-zinc-800 text-zinc-600 cursor-not-allowed border border-zinc-700' 
+                  : 'bg-white hover:bg-zinc-200 text-black active:bg-zinc-300'
               }`}
             >
-              zoom out
+              ZOOM OUT
             </button>
             <button 
               onClick={handleGuessSubmit}
-              className="w-[140px] md:w-[150px] py-4 md:py-3 bg-red-800 hover:bg-red-700 active:bg-red-600 text-white font-extrabold text-base md:text-lg rounded-lg shadow-lg transition-colors"
+              className="w-[140px] md:w-[160px] py-4 md:py-4 bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-bold text-xs md:text-sm tracking-wider rounded-lg shadow-lg transition-colors"
             >
-              guess
+              SUBMIT
             </button>
           </div>
         )}
@@ -772,9 +771,9 @@ useEffect(() => {
           <div className="absolute bottom-20 portrait:top-20 portrait:bottom-auto md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 md:gap-3 px-4 z-50">
             <button 
               onClick={() => setShowResults(true)}
-              className="w-[140px] md:w-[150px] py-4 md:py-3 bg-sky-900 hover:bg-sky-800 active:bg-sky-700 text-white font-extrabold text-base md:text-lg rounded-lg shadow-lg transition-colors"
+              className="w-[160px] md:w-[180px] py-4 md:py-4 bg-white hover:bg-zinc-200 active:bg-zinc-300 text-black font-bold text-xs md:text-sm tracking-wider rounded-lg shadow-lg transition-colors"
             >
-              view results
+              VIEW RESULTS
             </button>
           </div>
         )}
@@ -810,7 +809,7 @@ useEffect(() => {
                     FINAL SCORE
                   </h3>
                   <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-6 text-center">
-                    <p className="text-5xl md:text-6xl font-bold text-white mb-1">
+                    <p className="text-4xl md:text-5xl font-bold text-white mb-1">
                       {gameResults.score.finalScore.toLocaleString()}
                     </p>
                     <p className="text-zinc-500 text-sm font-medium">points</p>
