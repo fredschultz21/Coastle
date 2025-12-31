@@ -37,3 +37,25 @@ export async function getDaily(req, res) {
     res.status(500).json({ error: "Server error", details: err.message });
   }
 }
+
+export async function getInfinite(req, res) {
+  try {
+    const { rows } = await pool.query("SELECT * FROM locations");
+
+    if (rows.length === 0) {
+      return res.status(404).json({ error: "No locations found" });
+    }
+
+    const locations = rows.map(location => ({
+      ...location,
+      latitude: parseFloat(location.latitude),
+      longitude: parseFloat(location.longitude)
+    }));
+    
+    res.json(locations);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error", details: err.message });
+  }
+}

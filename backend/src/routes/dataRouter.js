@@ -1,5 +1,5 @@
 import express from "express";
-import { getDaily } from "../controllers/dataController.js";
+import { getDaily, getInfinite } from "../controllers/dataController.js";
 
 const router = express.Router();
 
@@ -9,5 +9,6 @@ router.get("/test", (req, res) => {
 });
 
 router.get("/daily", getDaily);
+router.get("/infinite", getInfinite);
 
 export default router;
