@@ -36,11 +36,20 @@ export default function Home() {
   const MAP_WIDTH = 5280;
   const MAP_HEIGHT = 417;
 
-  const dailyId = new Date().toISOString().split('T')[0];
+  const getCentralDateString = () => {
+    const now = new Date();
+    const centralTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/Chicago' }));
+    const year = centralTime.getFullYear();
+    const month = String(centralTime.getMonth() + 1).padStart(2, '0');
+    const day = String(centralTime.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const dailyId = getCentralDateString();
 
   useEffect(() => {
     const clearOldDailyGames = () => {
-      const today = new Date().toISOString().split('T')[0];
+      const today = getCentralDateString();
       
       for (let i = localStorage.length - 1; i >= 0; i--) {
         const key = localStorage.key(i);
@@ -137,7 +146,7 @@ export default function Home() {
       
       const turnNumber = 11 - newZoom;
       if (turnNumber >= 2) {
-        const dailyId = new Date().toISOString().split('T')[0];
+        const dailyId = getCentralDateString();
         localStorage.setItem(`coastle-${dailyId}`, JSON.stringify({
           turn: turnNumber,
           zoom: newZoom,
@@ -349,7 +358,7 @@ export default function Home() {
       setGameResults(resultsToSave);
       setShowResults(true);
 
-      const dailyId = new Date().toISOString().split('T')[0];
+      const dailyId = getCentralDateString();
       localStorage.setItem(`coastle-${dailyId}`, JSON.stringify({
         completed: true,
         results: resultsToSave
@@ -516,7 +525,7 @@ useEffect(() => {
   useEffect(() => {
     if (!locationData) return;
     
-    const dailyId = new Date().toISOString().split('T')[0];
+    const dailyId = getCentralDateString();
     const savedGame = localStorage.getItem(`coastle-${dailyId}`);
     
     if (savedGame) {
