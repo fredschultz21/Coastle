@@ -807,6 +807,43 @@ useEffect(() => {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-xs font-bold tracking-widest text-zinc-500 mb-3">
+                    FINAL SCORE
+                  </h3>
+                  <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-6 text-center">
+                    <p className="text-5xl md:text-6xl font-bold text-white mb-1">
+                      {gameResults.score.finalScore.toLocaleString()}
+                    </p>
+                    <p className="text-zinc-500 text-sm font-medium">points</p>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-xs font-bold tracking-widest text-zinc-500 mb-3">
+                    SCORE BREAKDOWN
+                  </h3>
+                  <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4">
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-zinc-400 text-sm">Turn {gameResults.turnNumber} base</span>
+                        <span className="text-green-400 font-semibold">+{gameResults.score.basePoints.toLocaleString()}</span>
+                      </div>
+                      {gameResults.score.penalty > 0 && (
+                        <div className="flex justify-between items-center">
+                          <span className="text-zinc-400 text-sm">Distance penalty ({gameResults.score.distanceRings} × 200 mi)</span>
+                          <span className={`font-semibold ${
+                            gameResults.score.penalty >= 3000 ? 'text-red-400' :
+                            gameResults.score.penalty >= 2000 ? 'text-orange-400' :
+                            gameResults.score.penalty >= 1000 ? 'text-yellow-400' :
+                            'text-green-400'
+                          }`}>−{gameResults.score.penalty.toLocaleString()}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-xs font-bold tracking-widest text-zinc-500 mb-3">
                     PERFORMANCE
                   </h3>
                   <div className="grid grid-cols-2 gap-3">
@@ -821,46 +858,6 @@ useEffect(() => {
                       <p className="text-white text-xl font-bold">
                         {gameResults.turnNumber} of 4
                       </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xs font-bold tracking-widest text-zinc-500 mb-3">
-                    SCORE BREAKDOWN
-                  </h3>
-                  <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4">
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center">
-                        <span className="text-zinc-400 text-sm">Turn {gameResults.turnNumber} base</span>
-                        <span className="text-white font-semibold">{gameResults.score.basePoints.toLocaleString()}</span>
-                      </div>
-                      {gameResults.score.penalty > 0 && (
-                        <div className="flex justify-between items-center">
-                          <span className="text-zinc-400 text-sm">Distance penalty</span>
-                          <span className="text-white font-semibold">−{gameResults.score.penalty.toLocaleString()}</span>
-                        </div>
-                      )}
-                      <div className="border-t border-zinc-700 pt-3 flex justify-between items-center">
-                        <span className="text-white font-bold">Final Score</span>
-                        <span className="text-white font-bold text-2xl">{gameResults.score.finalScore.toLocaleString()}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="text-xs font-bold tracking-widest text-zinc-500 mb-3">
-                    COORDINATES
-                  </h3>
-                  <div className="bg-zinc-800 border border-zinc-700 rounded-lg divide-y divide-zinc-700">
-                    <div className="p-3 flex justify-between items-center">
-                      <span className="text-zinc-400 text-xs font-medium">Your guess</span>
-                      <span className="text-white text-xs font-mono">{gameResults.guessedLatLong.lat.toFixed(4)}°, {gameResults.guessedLatLong.lon.toFixed(4)}°</span>
-                    </div>
-                    <div className="p-3 flex justify-between items-center">
-                      <span className="text-zinc-400 text-xs font-medium">Actual location</span>
-                      <span className="text-white text-xs font-mono">{gameResults.actualLocation.lat.toFixed(4)}°, {gameResults.actualLocation.lon.toFixed(4)}°</span>
                     </div>
                   </div>
                 </div>
