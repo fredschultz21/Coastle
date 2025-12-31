@@ -84,11 +84,11 @@ export default function Infinite() {
       .slice(0, 3);
     
     const randomIndex = Math.floor(Math.random() * sortedByChoice.length);
-    const selectedId = parseInt(sortedByChoice[randomIndex][0]);
+    const selectedId = sortedByChoice[randomIndex][0];
     
     choiceValues[selectedId] = 0;
     Object.keys(choiceValues).forEach(id => {
-      if (parseInt(id) !== selectedId) {
+        if (id !== selectedId) {
         choiceValues[id] = (choiceValues[id] || 0) + 1;
       }
     });
