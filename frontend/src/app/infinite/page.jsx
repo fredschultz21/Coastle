@@ -539,9 +539,9 @@ export default function Infinite() {
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
             <span className="text-white">coastle</span>
           </h1>
-          <p className="text-xs md:text-sm text-zinc-400 font-medium mt-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">infinite mode</p>
+          <p className="text-xs md:text-sm text-zinc-400 font-medium mt-1" style={{textShadow: '0 0 40px #000, 0 0 60px #000, 0 0 80px #000, 0 0 100px #000, 0 4px 50px #000, 0 8px 80px #000'}}>infinite mode</p>
         </div>
-        <div className="absolute top-4 md:top-6 right-[76px] md:right-[88px] z-50 flex items-center gap-3 md:gap-4">
+        <div className="absolute top-4 md:top-6.5 right-4 md:right-6 z-50 flex items-center gap-3 md:gap-4 pr-[52px] md:pr-[56px]">
           <div className="text-right">
             <p className="text-xs md:text-sm font-medium text-zinc-400">
               Total Score: <span className="text-white font-bold">{totalScore.toLocaleString()}</span>
@@ -550,11 +550,11 @@ export default function Infinite() {
               Locations: <span className="text-white font-bold">{locationsPlayed}</span>
             </p>
           </div>
-          <Link 
-            href="/"
-            className="px-5 py-3 md:px-6 md:py-3 bg-white/3 hover:bg-white/20 active:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-bold text-xs md:text-sm tracking-wider rounded-lg shadow-lg transition-colors whitespace-nowrap"
+          <Link
+            href="/how-to-play"
+            className="h-13 md:h-[44px] px-5 md:px-6 bg-white/3 hover:bg-white/20 active:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-bold text-xs md:text-sm tracking-wider rounded-lg shadow-lg transition-colors whitespace-nowrap flex items-center justify-center"
           >
-            DAILY MODE
+            HOW TO PLAY
           </Link>
         </div>
         <div className="absolute inset-0 bg-zinc-900">
@@ -739,52 +739,52 @@ export default function Infinite() {
             onClick={() => setShowResults(false)}
           >
             <div 
-              className="bg-zinc-900 rounded-2xl p-6 md:p-8 max-w-lg w-full border border-zinc-800 max-h-[90vh] overflow-y-auto relative"
+              className="bg-zinc-900 rounded-2xl p-5 md:p-6 max-w-sm w-full border border-zinc-800 max-h-[90vh] overflow-y-auto relative"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setShowResults(false)}
-                className="absolute top-3 right-3 h-8 w-8 border border-zinc-700 hover:bg-zinc-800 active:bg-zinc-700 rounded-full flex items-center justify-center text-zinc-400 hover:text-white text-lg font-bold transition-colors"
+                className="absolute top-2 right-2 h-7 w-7 border border-zinc-700 hover:bg-zinc-800 active:bg-zinc-700 rounded-full flex items-center justify-center text-zinc-400 hover:text-white text-lg font-bold transition-colors"
               >
                 ×
               </button>
 
-              <div className="text-center mb-8">
-                <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-2">
+              <div className="text-center mb-5">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-1">
                   {gameResults.isCorrect ? "Perfect!" : "Results"}
                 </h2>
-                <p className="text-zinc-500 text-sm tracking-wide">
+                <p className="text-zinc-500 text-xs tracking-wide">
                   {gameResults.isCorrect ? "Within 200 miles" : `${gameResults.distance.toFixed(0)} miles away`}
                 </p>
               </div>
               
-              <div className="space-y-6">
+              <div className="space-y-4">
                 <div>
-                  <h3 className="text-xs font-bold tracking-widest text-zinc-500 mb-3">
+                  <h3 className="text-[10px] font-bold tracking-widest text-zinc-500 mb-2">
                     FINAL SCORE
                   </h3>
-                  <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4 text-center">
-                    <p className="text-3xl md:text-4xl font-bold text-white">
+                  <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-3 text-center">
+                    <p className="text-2xl md:text-3xl font-bold text-white">
                       {gameResults.score.finalScore.toLocaleString()}
                     </p>
-                    <p className="text-zinc-500 text-sm font-medium">points</p>
+                    <p className="text-zinc-500 text-xs font-medium">points</p>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-xs font-bold tracking-widest text-zinc-500 mb-3">
+                  <h3 className="text-[10px] font-bold tracking-widest text-zinc-500 mb-2">
                     SCORE BREAKDOWN
                   </h3>
-                  <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4">
-                    <div className="space-y-3">
+                  <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-3">
+                    <div className="space-y-2">
                       <div className="flex justify-between items-center">
-                        <span className="text-zinc-400 text-sm">Turn {gameResults.turnNumber} base</span>
-                        <span className="text-green-400 font-semibold">+{gameResults.score.basePoints.toLocaleString()}</span>
+                        <span className="text-zinc-400 text-xs">Turn {gameResults.turnNumber} base</span>
+                        <span className="text-green-400 font-semibold text-sm">+{gameResults.score.basePoints.toLocaleString()}</span>
                       </div>
                       {gameResults.score.penalty > 0 && (
                         <div className="flex justify-between items-center">
-                          <span className="text-zinc-400 text-sm">Distance penalty ({gameResults.score.distanceRings} × 200 mi)</span>
-                          <span className={`font-semibold ${
+                          <span className="text-zinc-400 text-xs">Distance penalty ({gameResults.score.distanceRings} × 200 mi)</span>
+                          <span className={`font-semibold text-sm ${
                             gameResults.score.penalty >= 3000 ? 'text-red-400' :
                             gameResults.score.penalty >= 2000 ? 'text-orange-400' :
                             gameResults.score.penalty >= 1000 ? 'text-yellow-400' :
@@ -797,19 +797,19 @@ export default function Infinite() {
                 </div>
 
                 <div>
-                  <h3 className="text-xs font-bold tracking-widest text-zinc-500 mb-3">
+                  <h3 className="text-[10px] font-bold tracking-widest text-zinc-500 mb-2">
                     PERFORMANCE
                   </h3>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4">
-                      <p className="text-zinc-500 text-xs font-medium mb-1">Distance</p>
-                      <p className="text-white text-xl font-bold">
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-3">
+                      <p className="text-zinc-500 text-[10px] font-medium mb-0.5">Distance</p>
+                      <p className="text-white text-lg font-bold">
                         {gameResults.distance.toFixed(0)} mi
                       </p>
                     </div>
-                    <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4">
-                      <p className="text-zinc-500 text-xs font-medium mb-1">Turn</p>
-                      <p className="text-white text-xl font-bold">
+                    <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-3">
+                      <p className="text-zinc-500 text-[10px] font-medium mb-0.5">Turn</p>
+                      <p className="text-white text-lg font-bold">
                         {gameResults.turnNumber} of 4
                       </p>
                     </div>
@@ -817,19 +817,19 @@ export default function Infinite() {
                 </div>
 
                 <div>
-                  <h3 className="text-xs font-bold tracking-widest text-zinc-500 mb-3">
+                  <h3 className="text-[10px] font-bold tracking-widest text-zinc-500 mb-2">
                     TOTAL STATS
                   </h3>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4">
-                      <p className="text-zinc-500 text-xs font-medium mb-1">Total Score</p>
-                      <p className="text-white text-xl font-bold">
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-3">
+                      <p className="text-zinc-500 text-[10px] font-medium mb-0.5">Total Score</p>
+                      <p className="text-white text-lg font-bold">
                         {totalScore.toLocaleString()}
                       </p>
                     </div>
-                    <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4">
-                      <p className="text-zinc-500 text-xs font-medium mb-1">Locations</p>
-                      <p className="text-white text-xl font-bold">
+                    <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-3">
+                      <p className="text-zinc-500 text-[10px] font-medium mb-0.5">Locations</p>
+                      <p className="text-white text-lg font-bold">
                         {locationsPlayed}
                       </p>
                     </div>
@@ -837,16 +837,16 @@ export default function Infinite() {
                 </div>
               </div>
 
-              <div className="mt-8 space-y-3">
+              <div className="mt-5 space-y-2">
                 <button
                   onClick={handleNextLocation}
-                  className="w-full px-6 py-4 bg-white hover:bg-zinc-200 active:bg-zinc-300 text-black font-bold text-sm tracking-wider rounded-lg transition-colors"
+                  className="w-full px-6 py-3 bg-white hover:bg-zinc-200 active:bg-zinc-300 text-black font-bold text-xs tracking-wider rounded-lg transition-colors"
                 >
                   NEXT LOCATION
                 </button>
                 <button
                   onClick={() => setShowResults(false)}
-                  className="w-full px-6 py-4 bg-zinc-800/50 hover:bg-zinc-800/70 active:bg-zinc-800/90 border border-zinc-700/50 text-white font-bold text-sm tracking-wider rounded-lg transition-colors"
+                  className="w-full px-6 py-3 bg-zinc-800/50 hover:bg-zinc-800/70 active:bg-zinc-800/90 border border-zinc-700/50 text-white font-bold text-xs tracking-wider rounded-lg transition-colors"
                 >
                   CLOSE
                 </button>
