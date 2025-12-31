@@ -781,96 +781,105 @@ useEffect(() => {
 
         {showResults && gameResults && (
           <div 
-            className="absolute inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+            className="absolute inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
             onClick={() => setShowResults(false)}
           >
             <div 
-              className="bg-zinc-900 rounded-2xl p-6 md:p-8 max-w-md w-full border-2 border-zinc-700 max-h-[90vh] overflow-y-auto relative"
+              className="bg-zinc-900 rounded-2xl p-6 md:p-8 max-w-lg w-full border border-zinc-800 max-h-[90vh] overflow-y-auto relative"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setShowResults(false)}
-                className="absolute top-2 right-2 h-8 w-8 md:h-8 md:w-8 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg z-10"
+                className="absolute top-3 right-3 h-8 w-8 border border-zinc-700 hover:bg-zinc-800 active:bg-zinc-700 rounded-full flex items-center justify-center text-zinc-400 hover:text-white text-lg font-bold transition-colors"
               >
                 ×
               </button>
 
-              <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-4 md:mb-6">
-                {gameResults.isCorrect ? "Correct!" : "Not Quite!"}
-              </h2>
+              <div className="text-center mb-8">
+                <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-2">
+                  {gameResults.isCorrect ? "Perfect!" : "Results"}
+                </h2>
+                <p className="text-zinc-500 text-sm tracking-wide">
+                  {gameResults.isCorrect ? "Within 200 miles" : `${gameResults.distance.toFixed(0)} miles away`}
+                </p>
+              </div>
               
-              <div className="space-y-3 md:space-y-4">
-                <div className="bg-zinc-800 rounded-lg p-3 md:p-4">
-                  <p className="text-zinc-400 text-xs md:text-sm">Distance</p>
-                  <p className="text-white text-xl md:text-2xl font-bold">
-                    {gameResults.distance.toFixed(2)} miles
-                  </p>
-                </div>
-
-                <div className="bg-zinc-800 rounded-lg p-3 md:p-4">
-                  <p className="text-zinc-400 text-xs md:text-sm">Turn</p>
-                  <p className="text-white text-xl md:text-2xl font-bold">
-                    Turn {gameResults.turnNumber} of 4
-                  </p>
-                </div>
-
-                <div className="bg-zinc-800 rounded-lg p-3 md:p-4">
-                  <p className="text-zinc-400 text-xs md:text-sm mb-2">Score Breakdown</p>
-                  <div className="space-y-1 text-xs md:text-sm">
-                    <div className="flex justify-between text-white">
-                      <span>Base Points (Turn {gameResults.turnNumber}):</span>
-                      <span className="font-bold">+{gameResults.score.basePoints}</span>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xs font-bold tracking-widest text-zinc-500 mb-3">
+                    PERFORMANCE
+                  </h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4">
+                      <p className="text-zinc-500 text-xs font-medium mb-1">Distance</p>
+                      <p className="text-white text-xl font-bold">
+                        {gameResults.distance.toFixed(0)} mi
+                      </p>
                     </div>
-                    {gameResults.score.penalty > 0 && (
-                      <div className="flex justify-between text-red-400">
-                        <span>Distance Penalty ({gameResults.score.distanceRings} × 200 mi):</span>
-                        <span className="font-bold">-{gameResults.score.penalty}</span>
+                    <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4">
+                      <p className="text-zinc-500 text-xs font-medium mb-1">Turn</p>
+                      <p className="text-white text-xl font-bold">
+                        {gameResults.turnNumber} of 4
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-xs font-bold tracking-widest text-zinc-500 mb-3">
+                    SCORE BREAKDOWN
+                  </h3>
+                  <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4">
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-zinc-400 text-sm">Turn {gameResults.turnNumber} base</span>
+                        <span className="text-white font-semibold">{gameResults.score.basePoints.toLocaleString()}</span>
                       </div>
-                    )}
-                    <div className="border-t border-zinc-600 my-2"></div>
-                    <div className="flex justify-between text-white text-base md:text-lg">
-                      <span className="font-bold">Final Score:</span>
-                      <span className="font-bold text-green-400">{gameResults.score.finalScore}</span>
+                      {gameResults.score.penalty > 0 && (
+                        <div className="flex justify-between items-center">
+                          <span className="text-zinc-400 text-sm">Distance penalty</span>
+                          <span className="text-white font-semibold">−{gameResults.score.penalty.toLocaleString()}</span>
+                        </div>
+                      )}
+                      <div className="border-t border-zinc-700 pt-3 flex justify-between items-center">
+                        <span className="text-white font-bold">Final Score</span>
+                        <span className="text-white font-bold text-2xl">{gameResults.score.finalScore.toLocaleString()}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-zinc-800 rounded-lg p-3 md:p-4">
-                  <p className="text-zinc-400 text-xs md:text-sm mb-2">Coordinates</p>
-                  <div className="space-y-1 text-[10px] md:text-xs">
-                    <div className="flex justify-between text-white">
-                      <span>Your Guess:</span>
-                      <span>{gameResults.guessedLatLong.lat.toFixed(4)}°, {gameResults.guessedLatLong.lon.toFixed(4)}°</span>
+                <div>
+                  <h3 className="text-xs font-bold tracking-widest text-zinc-500 mb-3">
+                    COORDINATES
+                  </h3>
+                  <div className="bg-zinc-800 border border-zinc-700 rounded-lg divide-y divide-zinc-700">
+                    <div className="p-3 flex justify-between items-center">
+                      <span className="text-zinc-400 text-xs font-medium">Your guess</span>
+                      <span className="text-white text-xs font-mono">{gameResults.guessedLatLong.lat.toFixed(4)}°, {gameResults.guessedLatLong.lon.toFixed(4)}°</span>
                     </div>
-                    <div className="flex justify-between text-green-400">
-                      <span>Actual Location:</span>
-                      <span>{gameResults.actualLocation.lat.toFixed(4)}°, {gameResults.actualLocation.lon.toFixed(4)}°</span>
+                    <div className="p-3 flex justify-between items-center">
+                      <span className="text-zinc-400 text-xs font-medium">Actual location</span>
+                      <span className="text-white text-xs font-mono">{gameResults.actualLocation.lat.toFixed(4)}°, {gameResults.actualLocation.lon.toFixed(4)}°</span>
                     </div>
                   </div>
                 </div>
-
-                {gameResults.isCorrect && (
-                  <div className="bg-green-900/30 border border-green-600 rounded-lg p-3 md:p-4 text-center">
-                    <p className="text-green-400 font-bold text-sm md:text-base">
-                      Within 200 miles!
-                    </p>
-                  </div>
-                )}
               </div>
 
-              <button
-                onClick={handleShare}
-                className="w-full mt-4 md:mt-6 px-6 py-4 md:py-3 bg-green-600 hover:bg-green-700 active:bg-green-500 text-white font-bold text-base md:text-lg rounded-lg transition-colors"
-              >
-                {shareButtonText}
-              </button>
-
-              <button
-                onClick={() => setShowResults(false)}
-                className="w-full mt-3 md:mt-3 px-6 py-4 md:py-3 bg-blue-600 hover:bg-blue-700 active:bg-blue-500 text-white font-bold text-base md:text-lg rounded-lg transition-colors"
-              >
-                Close
-              </button>
+              <div className="mt-8 space-y-3">
+                <button
+                  onClick={handleShare}
+                  className="w-full px-6 py-4 bg-white hover:bg-zinc-200 active:bg-zinc-300 text-black font-bold text-sm tracking-wider rounded-lg transition-colors"
+                >
+                  {shareButtonText.toUpperCase()}
+                </button>
+                <button
+                  onClick={() => setShowResults(false)}
+                  className="w-full px-6 py-4 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 border border-zinc-700 text-white font-bold text-sm tracking-wider rounded-lg transition-colors"
+                >
+                  CLOSE
+                </button>
+              </div>
             </div>
           </div>
         )}
