@@ -13,100 +13,119 @@ export default function HowToPlay() {
       </Head>
 
       <div className="min-h-screen bg-black text-white">
-        <div className="max-w-3xl mx-auto px-4 py-8 md:py-12">
-          <div className="mb-8">
-            <Link href="/" className="text-sky-500 hover:text-sky-400 text-sm md:text-base">
-              ← Back to Game
+        <div className="max-w-4xl mx-auto px-6 py-12 md:py-16">
+          <div className="mb-12">
+            <Link href="/" className="text-zinc-500 hover:text-white transition-colors font-medium text-sm tracking-wide">
+              ← BACK
             </Link>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
-            <span className="text-white">How to Play Coastle</span>
-          </h1>
+          <div className="mb-16">
+            <h1 className="text-6xl md:text-7xl font-extrabold tracking-tight mb-6">
+              coastle
+            </h1>
+            <p className="text-zinc-500 text-lg tracking-wide">
+              A daily geography challenge
+            </p>
+          </div>
 
-          <p className="text-zinc-400 text-lg md:text-xl mb-12">
-            A daily geography game about finding coastal locations
-          </p>
-
-          <div className="space-y-8">
-            <section className="bg-zinc-900 rounded-xl p-6 md:p-8 border border-zinc-800">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">
-                Objective
+          <div className="space-y-16">
+            <section className="max-w-2xl mx-auto">
+              <h2 className="text-sm font-bold tracking-widest text-zinc-500 mb-6">
+                OBJECTIVE
               </h2>
-              <p className="text-zinc-300 text-base md:text-lg leading-relaxed">
-                Find the real location of a mystery coastal spot somewhere in the world.
-                You begin very zoomed in and can zoom out a few times to see more of the area.
-                When you are ready, place a pin on the world map to make your guess.
+              <p className="text-zinc-300 text-lg md:text-xl leading-relaxed">
+                Identify a coastal location from satellite imagery. Start with a close view and zoom out strategically to reveal more context. Accuracy and efficiency determine your score.
               </p>
             </section>
 
-            <section className="bg-zinc-900 rounded-xl p-6 md:p-8 border border-zinc-800">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">
-                How to Play
+            <section className="max-w-2xl mx-auto">
+              <h2 className="text-sm font-bold tracking-widest text-zinc-500 mb-8">
+                GAMEPLAY
               </h2>
 
-              <div className="space-y-4">
-                {[1, 2, 3, 4].map((n) => (
-                  <div key={n} className="flex gap-4">
-                    <div className="flex-shrink-0 w-8 h-8 bg-sky-800 rounded-full flex items-center justify-center font-bold">
-                      {n}
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg mb-1">
-                        {[
-                          "Look at the image",
-                          "Zoom out when needed",
-                          "Open the world map",
-                          "Place your guess",
-                        ][n - 1]}
-                      </h3>
-                      <p className="text-zinc-400">
-                        {[
-                          "Study the coastline, land, water, buildings, and terrain.",
-                          "You can zoom out a limited number of times to see more of the area. Using fewer zooms gives more points.",
-                          "Open the small pixelated world map to see the full globe.",
-                          "Click on the map to drop a pin where you think the location is. You can move and zoom the map for accuracy.",
-                        ][n - 1]}
-                      </p>
-                    </div>
+              <div className="space-y-8">
+                <div className="flex gap-6">
+                  <div className="flex-shrink-0 w-10 h-10 border border-zinc-700 rounded-full flex items-center justify-center font-bold text-sm text-zinc-400">
+                    1
                   </div>
-                ))}
-
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-sky-800 rounded-full flex items-center justify-center font-bold">
-                    5
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg mb-1">
-                      Submit your guess
+                  <div className="pt-1">
+                    <h3 className="font-semibold text-white text-lg mb-2">
+                      Examine the imagery
                     </h3>
-                    <p className="text-zinc-400">
-                      Submit your guess to see how close you were and your score.
+                    <p className="text-zinc-400 leading-relaxed">
+                      Study the coastline, terrain features, and any visible landmarks or structures.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-6">
+                  <div className="flex-shrink-0 w-10 h-10 border border-zinc-700 rounded-full flex items-center justify-center font-bold text-sm text-zinc-400">
+                    2
+                  </div>
+                  <div className="pt-1">
+                    <h3 className="font-semibold text-white text-lg mb-2">
+                      Zoom out strategically
+                    </h3>
+                    <p className="text-zinc-400 leading-relaxed">
+                      You have limited zoom-outs. Each level reveals more area but reduces your potential score.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-6">
+                  <div className="flex-shrink-0 w-10 h-10 border border-zinc-700 rounded-full flex items-center justify-center font-bold text-sm text-zinc-400">
+                    3
+                  </div>
+                  <div className="pt-1">
+                    <h3 className="font-semibold text-white text-lg mb-2">
+                      Place your marker
+                    </h3>
+                    <p className="text-zinc-400 leading-relaxed">
+                      Open the world map, navigate to your predicted location, and drop a pin.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-6">
+                  <div className="flex-shrink-0 w-10 h-10 border border-zinc-700 rounded-full flex items-center justify-center font-bold text-sm text-zinc-400">
+                    4
+                  </div>
+                  <div className="pt-1">
+                    <h3 className="font-semibold text-white text-lg mb-2">
+                      Submit and review
+                    </h3>
+                    <p className="text-zinc-400 leading-relaxed">
+                      See your distance from the target and your final score breakdown.
                     </p>
                   </div>
                 </div>
               </div>
             </section>
 
-            <section className="bg-zinc-900 rounded-xl p-6 md:p-8 border border-zinc-800">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">
-                Scoring
+            <section className="max-w-2xl mx-auto">
+              <h2 className="text-sm font-bold tracking-widest text-zinc-500 mb-8">
+                SCORING SYSTEM
               </h2>
 
-              <div className="space-y-6">
+              <div className="space-y-10">
                 <div>
-                  <h3 className="font-bold text-lg mb-3 text-green-500">
-                    Add Base Points
+                  <h3 className="text-white font-semibold text-lg mb-4">
+                    Base Points by Turn
                   </h3>
-
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    {[4000, 3000, 2000, 1000].map((pts, i) => (
-                      <div key={pts} className="bg-zinc-800 rounded-lg p-3 text-center">
-                        <div className="text-2xl font-bold text-green-500">
-                          {pts}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {[
+                      { turn: 1, points: 4000 },
+                      { turn: 2, points: 3000 },
+                      { turn: 3, points: 2000 },
+                      { turn: 4, points: 1000 }
+                    ].map(({ turn, points }) => (
+                      <div key={turn} className="bg-zinc-900 border border-zinc-800 rounded-lg p-4 text-center">
+                        <div className="text-2xl font-bold text-white mb-1">
+                          {points.toLocaleString()}
                         </div>
-                        <div className="text-xs text-zinc-400">
-                          {["First", "Second", "Third", "Fourth"][i]} turn
+                        <div className="text-xs text-zinc-500 font-medium tracking-wide">
+                          TURN {turn}
                         </div>
                       </div>
                     ))}
@@ -114,54 +133,42 @@ export default function HowToPlay() {
                 </div>
 
                 <div>
-                  <h3 className="font-bold text-lg mb-3 text-red-500">
-                    Subtract Distance Penalty
+                  <h3 className="text-white font-semibold text-lg mb-4">
+                    Distance Penalties
                   </h3>
-
-                  <div className="bg-zinc-800 rounded-lg p-4">
-                    <p className="text-zinc-300 mb-3">
-                      You lose 1000 points for every 200 miles your guess is away from the correct location.
-                    </p>
-
-                    <div className="space-y-2 text-sm text-zinc-400">
-                      <div className="flex justify-between">
-                        <span>Within 200 miles</span>
-                        <span className="text-green-500 font-bold">No penalty</span>
+                  <div className="bg-zinc-900 border border-zinc-800 rounded-lg divide-y divide-zinc-800">
+                    {[
+                      { range: "0–200 mi", penalty: "0", color: "text-green-400", borderColor: "border-l-green-400" },
+                      { range: "200–400 mi", penalty: "1,000", color: "text-yellow-400", borderColor: "border-l-yellow-400" },
+                      { range: "400–600 mi", penalty: "2,000", color: "text-orange-400", borderColor: "border-l-orange-400" },
+                      { range: "600+ mi", penalty: "3,000+", color: "text-red-400", borderColor: "border-l-red-400" }
+                    ].map(({ range, penalty, color, borderColor }) => (
+                      <div key={range} className={`flex justify-between px-4 py-3 border-l-4 ${borderColor}`}>
+                        <span className="text-zinc-400 text-sm">{range}</span>
+                        <span className={`${color} text-sm font-semibold`}>
+                          {penalty === "0" ? "—" : `−${penalty}`}
+                        </span>
                       </div>
-                      <div className="flex justify-between">
-                        <span>Within 400 miles</span>
-                        <span className="text-yellow-300">-1000 points</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Within 600 miles</span>
-                        <span className="text-orange-500">-2000 points</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>More than 600 miles</span>
-                        <span className="text-red-500">-3000 points or more</span>
-                      </div>
-                    </div>
+                    ))}
                   </div>
+                  <p className="text-zinc-500 text-sm mt-3">
+                    Penalty increases by 1,000 points for every 200 miles of error.
+                  </p>
                 </div>
 
-                <div className="bg-zinc-800 rounded-lg p-4">
-                  <h3 className="font-bold mb-2">
-                    Example:
-                  </h3>
-
-                  <div className="space-y-1 text-sm">
-                    <div className="flex justify-between text-zinc-300">
-                      <span>Second turn guess</span>
-                      <span className="text-green-600">+3000</span>
+                <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-5">
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-zinc-400">Turn 2 base</span>
+                      <span className="text-white font-medium">3,000</span>
                     </div>
-                    <div className="flex justify-between text-zinc-300">
-                      <span>450 miles away</span>
-                      <span className="text-red-500">-2000</span>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-zinc-400">Distance penalty (450 mi)</span>
+                      <span className="text-white font-medium">−2,000</span>
                     </div>
-                    <div className="border-t border-zinc-700 my-2"></div>
-                    <div className="flex justify-between font-bold text-lg">
-                      <span>Final score</span>
-                      <span className="text-white">1000</span>
+                    <div className="border-t border-zinc-800 pt-3 mt-3 flex justify-between items-center">
+                      <span className="text-white font-semibold">Final Score</span>
+                      <span className="text-white font-bold text-xl">1,000</span>
                     </div>
                   </div>
                 </div>
@@ -169,12 +176,12 @@ export default function HowToPlay() {
             </section>
           </div>
 
-          <div className="mt-12 text-center">
+          <div className="mt-20 pt-12 border-t border-zinc-900 text-center">
             <Link
               href="/"
-              className="inline-block px-8 py-4 bg-sky-800 hover:bg-sky-700 text-white font-bold text-lg rounded-lg transition-colors"
+              className="inline-block px-10 py-4 bg-white hover:bg-zinc-200 active:bg-zinc-300 text-black font-bold text-sm tracking-wider rounded-lg transition-colors"
             >
-              Start Playing →
+              START GAME
             </Link>
           </div>
         </div>
