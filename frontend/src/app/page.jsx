@@ -589,7 +589,8 @@ useEffect(() => {
           </h1>
         </div>
         <div className="absolute top-4 md:top-6 right-4 md:right-6 z-50 flex items-center gap-3 md:gap-4">
-          <p className="text-xs md:text-sm font-medium tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] text-zinc-300 text-right">
+          <p className="text-sm md:text-base font-semibold tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] text-white text-right">
+            daily game for<br />
             {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
           </p>
           <Link 
@@ -808,8 +809,8 @@ useEffect(() => {
                   <h3 className="text-xs font-bold tracking-widest text-zinc-500 mb-3">
                     FINAL SCORE
                   </h3>
-                  <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-6 text-center">
-                    <p className="text-4xl md:text-5xl font-bold text-white mb-1">
+                  <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-5 text-center">
+                    <p className="text-3xl md:text-4xl font-bold text-white">
                       {gameResults.score.finalScore.toLocaleString()}
                     </p>
                     <p className="text-zinc-500 text-sm font-medium">points</p>
