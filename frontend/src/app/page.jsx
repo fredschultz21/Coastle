@@ -597,7 +597,7 @@ useEffect(() => {
             <span className="text-white">coastle</span>
           </h1>
         </div>
-        <div className="absolute top-4 md:top-6 right-4 md:right-6 z-50 flex items-center gap-3 md:gap-4">
+        <div className="absolute top-4 md:top-6 right-[76px] md:right-[88px] z-50 flex items-center gap-3 md:gap-4">
           <p className="text-sm md:text-base font-semibold tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] text-white text-right">
             daily game for<br />
             {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}

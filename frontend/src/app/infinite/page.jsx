@@ -541,7 +541,7 @@ export default function Infinite() {
           </h1>
           <p className="text-xs md:text-sm text-zinc-400 font-medium mt-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">infinite mode</p>
         </div>
-        <div className="absolute top-4 md:top-6 right-4 md:right-6 z-50 flex items-center gap-3 md:gap-4">
+        <div className="absolute top-4 md:top-6 right-[76px] md:right-[88px] z-50 flex items-center gap-3 md:gap-4">
           <div className="text-right">
             <p className="text-xs md:text-sm font-medium text-zinc-400">
               Total Score: <span className="text-white font-bold">{totalScore.toLocaleString()}</span>
