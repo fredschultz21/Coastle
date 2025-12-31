@@ -10,9 +10,11 @@ export function Menu() {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="px-5 py-3 md:px-6 md:py-3 bg-white/3 hover:bg-white/20 active:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-bold text-xs md:text-sm tracking-wider rounded-lg shadow-lg transition-colors whitespace-nowrap"
+        className="w-12 h-12 md:w-11 md:h-11 bg-white/3 hover:bg-white/20 active:bg-white/30 backdrop-blur-sm border border-white/30 text-white rounded-lg shadow-lg transition-colors flex items-center justify-center"
       >
-        MENU
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
       </button>
 
       {isOpen && (
