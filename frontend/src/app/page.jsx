@@ -595,7 +595,7 @@ useEffect(() => {
           </p>
           <Link 
             href="/how-to-play"
-            className="px-5 py-3 md:px-6 md:py-3 bg-white hover:bg-zinc-200 active:bg-zinc-300 text-black font-bold text-xs md:text-sm tracking-wider rounded-lg shadow-lg transition-colors whitespace-nowrap"
+            className="px-5 py-3 md:px-6 md:py-3 bg-white/10 hover:bg-white/20 active:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-bold text-xs md:text-sm tracking-wider rounded-lg shadow-lg transition-colors whitespace-nowrap"
           >
             HOW TO PLAY
           </Link>
@@ -738,9 +738,9 @@ useEffect(() => {
         {isMinimized && (
           <button
             onClick={() => setIsMinimized(false)}
-            className="absolute bottom-6 right-2 md:right-6 p-4 md:p-3 bg-white hover:bg-zinc-200 active:bg-zinc-300 border border-zinc-300 rounded-lg shadow-lg transition-colors"
+            className="absolute bottom-6 right-2 md:right-6 p-4 md:p-3 bg-white/10 hover:bg-white/20 active:bg-white/30 backdrop-blur-sm border border-white/30 rounded-lg shadow-lg transition-colors"
           >
-            <svg className="w-6 h-6 md:w-5 md:h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
             </svg>
           </button>
@@ -753,8 +753,8 @@ useEffect(() => {
               disabled={satelliteZoom <= 7}
               className={`w-[140px] md:w-[160px] py-4 md:py-4 font-bold text-xs md:text-sm tracking-wider rounded-lg shadow-lg transition-colors ${
                 satelliteZoom <= 7 
-                  ? 'bg-zinc-800 text-zinc-600 cursor-not-allowed border border-zinc-700' 
-                  : 'bg-white hover:bg-zinc-200 text-black active:bg-zinc-300'
+                  ? 'bg-zinc-800/50 text-zinc-600 cursor-not-allowed border border-zinc-700/50 backdrop-blur-sm' 
+                  : 'bg-white/10 hover:bg-white/20 text-white active:bg-white/30 border border-white/30 backdrop-blur-sm'
               }`}
             >
               ZOOM OUT
@@ -772,7 +772,7 @@ useEffect(() => {
           <div className="absolute bottom-20 portrait:top-20 portrait:bottom-auto md:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 md:gap-3 px-4 z-50">
             <button 
               onClick={() => setShowResults(true)}
-              className="w-[160px] md:w-[180px] py-4 md:py-4 bg-white hover:bg-zinc-200 active:bg-zinc-300 text-black font-bold text-xs md:text-sm tracking-wider rounded-lg shadow-lg transition-colors"
+              className="w-[160px] md:w-[180px] py-4 md:py-4 bg-white/10 hover:bg-white/20 active:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-bold text-xs md:text-sm tracking-wider rounded-lg shadow-lg transition-colors"
             >
               VIEW RESULTS
             </button>
@@ -809,7 +809,7 @@ useEffect(() => {
                   <h3 className="text-xs font-bold tracking-widest text-zinc-500 mb-3">
                     FINAL SCORE
                   </h3>
-                  <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-5 text-center">
+                  <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4 text-center">
                     <p className="text-3xl md:text-4xl font-bold text-white">
                       {gameResults.score.finalScore.toLocaleString()}
                     </p>
@@ -866,13 +866,13 @@ useEffect(() => {
               <div className="mt-8 space-y-3">
                 <button
                   onClick={handleShare}
-                  className="w-full px-6 py-4 bg-white hover:bg-zinc-200 active:bg-zinc-300 text-black font-bold text-sm tracking-wider rounded-lg transition-colors"
+                  className="w-full px-6 py-4 bg-white/10 hover:bg-white/20 active:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-bold text-sm tracking-wider rounded-lg transition-colors"
                 >
                   {shareButtonText.toUpperCase()}
                 </button>
                 <button
                   onClick={() => setShowResults(false)}
-                  className="w-full px-6 py-4 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 border border-zinc-700 text-white font-bold text-sm tracking-wider rounded-lg transition-colors"
+                  className="w-full px-6 py-4 bg-zinc-800/50 hover:bg-zinc-800/70 active:bg-zinc-800/90 border border-zinc-700/50 text-white font-bold text-sm tracking-wider rounded-lg transition-colors"
                 >
                   CLOSE
                 </button>
