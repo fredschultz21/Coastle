@@ -535,13 +535,13 @@ export default function Infinite() {
       </Head>
       
       <div className="relative h-screen w-full overflow-hidden">
-        <div className="absolute top-4 md:top-6 left-4 md:left-6 z-50">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+        <div className="absolute top-3 md:top-6 left-4 md:left-6 z-50">
+          <h1 className="text-2xl md:text-5xl font-extrabold tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
             <span className="text-white">coastle</span>
           </h1>
-          <p className="text-xs md:text-sm text-zinc-400 font-medium mt-1" style={{textShadow: '0 0 40px #000, 0 0 60px #000, 0 0 80px #000, 0 0 100px #000, 0 4px 50px #000, 0 8px 80px #000'}}>infinite mode</p>
+          <p className="text-[12px] md:text-sm text-zinc-400 font-medium mt-0 md:mt-1" style={{textShadow: '0 0 40px #000, 0 0 60px #000, 0 0 80px #000, 0 0 100px #000, 0 4px 50px #000, 0 8px 80px #000'}}>infinite mode</p>
         </div>
-        <div className="absolute top-4 md:top-6.5 right-4 md:right-6 z-50 flex items-center gap-3 md:gap-4 pr-[52px] md:pr-[56px]">
+        <div className="absolute top-[19px] md:top-6.5 right-4 md:right-6 z-50 flex items-center gap-3 md:gap-4 pr-[52px] md:pr-[56px]">
           <div className="text-right">
             <p className="text-xs md:text-sm font-medium text-zinc-400">
               Total Score: <span className="text-white font-bold">{totalScore.toLocaleString()}</span>
@@ -552,7 +552,7 @@ export default function Infinite() {
           </div>
           <Link
             href="/how-to-play"
-            className="h-13 md:h-[44px] px-5 md:px-6 bg-white/3 hover:bg-white/20 active:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-bold text-xs md:text-sm tracking-wider rounded-lg shadow-lg transition-colors whitespace-nowrap flex items-center justify-center"
+            className="h-11 md:h-11 px-2 md:px-6 bg-white/3 hover:bg-white/20 active:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-bold text-xs md:text-sm tracking-wider rounded-lg shadow-lg transition-colors whitespace-nowrap flex items-center justify-center"
           >
             HOW TO PLAY
           </Link>
