@@ -593,21 +593,21 @@ useEffect(() => {
       
       <div className="relative h-screen w-full overflow-hidden">
         <div className="absolute top-4 md:top-6 left-4 md:left-6 z-50">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+          <h1 className="text-2xl md:text-5xl font-extrabold tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
             <span className="text-white">coastle</span>
           </h1>
         </div>
-        <div className="absolute top-4 md:top-6 right-4 md:right-6 z-50 flex items-center gap-3 md:gap-4 pr-[52px] md:pr-[56px]">
-          <p className="text-sm md:text-base font-semibold tracking-wide
+        <div className="absolute top-[19px] md:top-6 right-4 md:right-6 z-50 flex items-center gap-3 md:gap-4 pr-[56px] md:pr-[56px]">
+          <p className="text-xs md:text-base font-semibold tracking-wide
               drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]
               text-white text-right
-              translate-x-[2px] md:translate-x-[3px]">
+              translate-x-[3px] md:translate-x-[3px]">
             daily game for<br />
             {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
           </p>
           <Link 
             href="/how-to-play"
-            className="h-12 md:h-11 px-5 md:px-6 bg-white/3 hover:bg-white/20 active:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-bold text-xs md:text-sm tracking-wider rounded-lg shadow-lg transition-colors whitespace-nowrap flex items-center justify-center"
+            className="h-11 md:h-11 px-2 md:px-6 bg-white/3 hover:bg-white/20 active:bg-white/30 backdrop-blur-sm border border-white/30 text-white font-bold text-xs md:text-sm tracking-wider rounded-lg shadow-lg transition-colors whitespace-nowrap flex items-center justify-center"
           >
             HOW TO PLAY
           </Link>
