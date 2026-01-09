@@ -539,7 +539,7 @@ export default function Infinite() {
           <h1 className="text-2xl md:text-5xl font-extrabold tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
             <span className="text-white">coastle</span>
           </h1>
-          <p className="text-[12px] md:text-sm text-zinc-400 font-medium mt-0 md:mt-1" style={{textShadow: '0 0 40px #000, 0 0 60px #000, 0 0 80px #000, 0 0 100px #000, 0 4px 50px #000, 0 8px 80px #000'}}>infinite mode</p>
+          <p className="text-[12px] md:text-sm text-zinc-200 font-medium mt-0 md:mt-1" style={{textShadow: '0 0 40px #000, 0 0 60px #000, 0 0 80px #000, 0 0 100px #000, 0 4px 50px #000, 0 8px 80px #000'}}>infinite mode</p>
         </div>
         <div className="absolute top-[19px] md:top-6.5 right-4 md:right-6 z-50 flex items-center gap-3 md:gap-4 pr-[52px] md:pr-[56px]">
           <div className="text-right">
@@ -822,13 +822,13 @@ export default function Infinite() {
                   </h3>
                   <div className="grid grid-cols-2 gap-2">
                     <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-3">
-                      <p className="text-zinc-500 text-[10px] font-medium mb-0.5">Total Score</p>
+                      <p className="text-zinc-200 text-[10px] font-medium mb-0.5" style={{textShadow: '0 0 40px #000, 0 0 60px #000, 0 0 80px #000, 0 0 100px #000, 0 4px 50px #000, 0 8px 80px #000'}}>Total Score</p>
                       <p className="text-white text-lg font-bold">
                         {totalScore.toLocaleString()}
                       </p>
                     </div>
                     <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-3">
-                      <p className="text-zinc-500 text-[10px] font-medium mb-0.5">Locations</p>
+                      <p className="text-zinc-200 text-[10px] font-medium mb-0.5" style={{textShadow: '0 0 40px #000, 0 0 60px #000, 0 0 80px #000, 0 0 100px #000, 0 4px 50px #000, 0 8px 80px #000'}}>Locations</p>
                       <p className="text-white text-lg font-bold">
                         {locationsPlayed}
                       </p>

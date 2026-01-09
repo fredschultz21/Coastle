@@ -9,8 +9,23 @@ export const pool = new Pool({
     rejectUnauthorized: false
   },
   connectionTimeoutMillis: 10000,
+  idleTimeoutMillis: 30000,
+  max: 10,
+  min: 2,
+  query_timeout: 10000, 
+  statement_timeout: 10000,
+  keepAlive: true, 
+  keepAliveInitialDelayMillis: 10000,
 });
 
 pool.on('error', (err) => {
   console.error('Pool error:', err);
+});
+
+pool.on('connect', () => {
+  console.log('✓ Database connected');
+});
+
+pool.on('remove', () => {
+  console.log('- Connection removed from pool');
 });
