@@ -35,41 +35,59 @@ export default function HowToPlay() {
                 OBJECTIVE
               </h2>
               <p className="text-zinc-300 text-lg md:text-xl leading-relaxed">
-                Identify a coastal location from satellite imagery. Start with a close view and zoom out strategically to reveal more context. Accuracy and efficiency determine your score.
+                Look at satellite pictures of coastlines and guess where they are in the world. The closer you get and the fewer hints you use, the more points you earn!
               </p>
             </section>
 
             <section className="max-w-2xl mx-auto">
               <h2 className="text-sm font-bold tracking-widest text-zinc-500 mb-8">
-                GAMEPLAY
+                HOW TO PLAY
               </h2>
 
-              <div className="space-y-8">
-                <div className="flex gap-6">
-                  <div className="flex-shrink-0 w-10 h-10 border border-zinc-700 rounded-full flex items-center justify-center font-bold text-sm text-zinc-400">
-                    1
+              <div className="space-y-12">
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex gap-6 md:flex-1">
+                    <div className="flex-shrink-0 w-10 h-10 border border-zinc-700 rounded-full flex items-center justify-center font-bold text-sm text-zinc-400">
+                      1
+                    </div>
+                    <div className="pt-1">
+                      <h3 className="font-semibold text-white text-lg mb-2">
+                        Look at the satellite picture
+                      </h3>
+                      <p className="text-zinc-400 leading-relaxed">
+                        Study the image carefully. Where in the world do you think this place is?
+                      </p>
+                    </div>
                   </div>
-                  <div className="pt-1">
-                    <h3 className="font-semibold text-white text-lg mb-2">
-                      Examine the imagery
-                    </h3>
-                    <p className="text-zinc-400 leading-relaxed">
-                      Study the coastline, terrain features, and any visible landmarks or structures.
-                    </p>
+                  <div className="md:w-64 flex justify-center md:justify-end">
+                    <img 
+                      src="/satelliteexample.png" 
+                      alt="Satellite view example" 
+                      className="w-full max-w-[280px] md:max-w-none rounded-lg border border-zinc-800 shadow-lg"
+                    />
                   </div>
                 </div>
 
-                <div className="flex gap-6">
-                  <div className="flex-shrink-0 w-10 h-10 border border-zinc-700 rounded-full flex items-center justify-center font-bold text-sm text-zinc-400">
-                    2
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex gap-6 md:flex-1">
+                    <div className="flex-shrink-0 w-10 h-10 border border-zinc-700 rounded-full flex items-center justify-center font-bold text-sm text-zinc-400">
+                      2
+                    </div>
+                    <div className="pt-1">
+                      <h3 className="font-semibold text-white text-lg mb-2">
+                        Place your pin on the map
+                      </h3>
+                      <p className="text-zinc-400 leading-relaxed">
+                        Open the black and white map in the bottom right corner. Click where you think the location is to drop a red pin.
+                      </p>
+                    </div>
                   </div>
-                  <div className="pt-1">
-                    <h3 className="font-semibold text-white text-lg mb-2">
-                      Zoom out strategically
-                    </h3>
-                    <p className="text-zinc-400 leading-relaxed">
-                      You have limited zoom-outs. Each level reveals more area but reduces your potential score.
-                    </p>
+                  <div className="md:w-64 flex justify-center md:justify-end">
+                    <img 
+                      src="/pixelmapexample.png" 
+                      alt="Pixel map with pin example" 
+                      className="w-full max-w-[280px] md:max-w-none rounded-lg border border-zinc-800 shadow-lg"
+                    />
                   </div>
                 </div>
 
@@ -79,10 +97,10 @@ export default function HowToPlay() {
                   </div>
                   <div className="pt-1">
                     <h3 className="font-semibold text-white text-lg mb-2">
-                      Place your marker
+                      Use hints carefully
                     </h3>
                     <p className="text-zinc-400 leading-relaxed">
-                      Open the world map, navigate to your predicted location, and drop a pin.
+                      Press "ZOOM OUT" to see more of the picture and get a better view. But remember—each hint you use means fewer points at the end!
                     </p>
                   </div>
                 </div>
@@ -93,10 +111,10 @@ export default function HowToPlay() {
                   </div>
                   <div className="pt-1">
                     <h3 className="font-semibold text-white text-lg mb-2">
-                      Submit and review
+                      Submit and see your results
                     </h3>
                     <p className="text-zinc-400 leading-relaxed">
-                      See your distance from the target and your final score breakdown.
+                      When you're ready, hit "SUBMIT" to see how close you were and check your score!
                     </p>
                   </div>
                 </div>
@@ -130,6 +148,9 @@ export default function HowToPlay() {
                       </div>
                     ))}
                   </div>
+                  <p className="text-zinc-100 text-sm mt-4">
+                    The fewer hints you use, the more points you start with!
+                  </p>
                 </div>
 
                 <div>
@@ -151,12 +172,13 @@ export default function HowToPlay() {
                       </div>
                     ))}
                   </div>
-                  <p className="text-zinc-500 text-sm mt-3">
-                    Penalty increases by 1,000 points for every 200 miles of error.
+                  <p className="text-zinc-100 text-sm mt-3">
+                    The farther away you are, the more points you lose. Every 200 miles costs you 1,000 points!
                   </p>
                 </div>
 
                 <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-5">
+                  <h3 className="text-white font-semibold text-base mb-4">Example Score</h3>
                   <div className="space-y-3">
                     <div className="flex justify-between items-center text-sm">
                       <span className="text-zinc-400">Turn 2 base</span>

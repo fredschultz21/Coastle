@@ -26,6 +26,7 @@ export default function Infinite() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [totalScore, setTotalScore] = useState(0);
   const [locationsPlayed, setLocationsPlayed] = useState(0);
+  const [tutorialShowing, setTutorialShowing] = useState(true);
   const containerRef = useRef(null);
   const imageRef = useRef(null);
   const pinTimeoutRef = useRef(null);
@@ -711,7 +712,7 @@ export default function Infinite() {
                   : 'bg-white/3 hover:bg-white/20 text-white active:bg-white/30 border border-white/30 backdrop-blur-sm'
               }`}
             >
-              ZOOM OUT
+              HINT
             </button>
             <button 
               onClick={handleGuessSubmit}

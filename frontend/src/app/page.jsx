@@ -24,6 +24,7 @@ export default function Home() {
   const [lastPinchDistance, setLastPinchDistance] = useState(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [shareButtonText, setShareButtonText] = useState("Share Score");
+  const [tutorialShowing, setTutorialShowing] = useState(true);
   const containerRef = useRef(null);
   const imageRef = useRef(null);
   const pinTimeoutRef = useRef(null);
@@ -635,6 +636,72 @@ useEffect(() => {
           © Mapbox © OpenStreetMap contributors © Maxar
         </p>
 
+        {tutorialShowing && !hasGuessed && (
+          <div 
+            className="absolute inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
+            onClick={() => setTutorialShowing(false)}
+          >
+            <div 
+              className="bg-zinc-900 rounded-2xl p-4 md:p-5 max-w-xs w-full border border-zinc-800"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2 className="text-xl md:text-2xl font-extrabold text-white mb-4 text-center">
+                How to Play
+              </h2>
+              
+              <div className="space-y-3">
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="flex-shrink-0 w-6 h-6 border border-zinc-700 rounded-full flex items-center justify-center font-bold text-xs text-zinc-400">
+                      1
+                    </div>
+                    <p className="text-white text-xs md:text-sm font-medium">
+                      Look at the satellite picture. Where in the world is this place?
+                    </p>
+                  </div>
+                  <img 
+                    src="/satelliteexample.png" 
+                    alt="Satellite example" 
+                    className="w-full max-w-[180px] mx-auto rounded-lg border border-zinc-800"
+                  />
+                </div>
+
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="flex-shrink-0 w-6 h-6 border border-zinc-700 rounded-full flex items-center justify-center font-bold text-xs text-zinc-400">
+                      2
+                    </div>
+                    <p className="text-white text-xs md:text-sm font-medium">
+                      Open the black and white map in the bottom right. Click/tap to place a red pin.
+                    </p>
+                  </div>
+                  <img 
+                    src="/pixelmapexample.png" 
+                    alt="Pixel map example" 
+                    className="w-full max-w-[180px] mx-auto rounded-lg border border-zinc-800"
+                  />
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <div className="flex-shrink-0 w-6 h-6 border border-zinc-700 rounded-full flex items-center justify-center font-bold text-xs text-zinc-400">
+                    3
+                  </div>
+                  <p className="text-white text-xs md:text-sm font-medium">
+                    Press "HINT" to see more of the location, but you'll get fewer points! When ready, press "SUBMIT" to see how you did.
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setTutorialShowing(false)}
+                className="w-full mt-4 px-4 py-2.5 bg-white hover:bg-zinc-200 active:bg-zinc-300 text-black font-bold text-xs tracking-wider rounded-lg transition-colors"
+              >
+                GOT IT!
+              </button>
+            </div>
+          </div>
+        )}
+
         {!isMinimized && (
           <div 
             className={`
@@ -769,7 +836,7 @@ useEffect(() => {
                   : 'bg-white/3 hover:bg-white/20 text-white active:bg-white/30 border border-white/30 backdrop-blur-sm'
               }`}
             >
-              ZOOM OUT
+              HINT
             </button>
             <button 
               onClick={handleGuessSubmit}
